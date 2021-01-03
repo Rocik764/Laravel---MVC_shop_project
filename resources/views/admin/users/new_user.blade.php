@@ -12,17 +12,17 @@
     <script type="text/javascript" src="{{ asset('/js/sidebar_script.js') }}"></script>
 </head>
 <body>
-@include('fragments.animated')
+@include('admin.users.resources.views.fragments.animated')
 <header>
-    @include('fragments.menu')
+    @include('admin.users.resources.views.fragments.menu')
 </header>
 <div class="wrapper">
     <nav id="sidebar">
-        @include('fragments.side_menu')
+        @include('admin.users.resources.views.fragments.side_menu')
     </nav>
 
     <div id="content">
-        @include('fragments.side_menu_collapse')
+        @include('admin.users.resources.views.fragments.side_menu_collapse')
         <div id="content-main">
             <h1>Stwórz nowego użytkownika (test)</h1>
             <form action="#" action="@{/admin/save}" object="${user}" method="post">

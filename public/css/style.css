@@ -30,7 +30,15 @@ h1 {
 }
 
 .test {
-    margin-right: 70px;
+    margin-right: 80px;
+}
+
+.test2 {
+    color: #FFFFFF;
+    border:none;
+    background:none;
+    padding:0;
+    text-align:left;
 }
 
 .editProfileBtn {

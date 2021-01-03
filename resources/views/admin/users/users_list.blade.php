@@ -29,27 +29,32 @@
                     <thead>
                     <tr>
                         <th>User ID</th>
-                        <th>First name</th>
-                        <th>Last Name</th>
-                        <th>E-mail</th>
+                        <th>Name</th>
                         <th>Password</th>
+                        <th>E-mail</th>
+                        <th>Roles</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr each="user : ${listUsers}">
-                        <td text="${user.id}">User ID</td>
-                        <td text="${user.first_name}">First name</td>
-                        <td text="${user.last_name}">Last name</td>
-                        <td text="${user.email}">E-mail</td>
-                        <td text="${user.password}">Password</td>
+                    <tr @foreach($users as $user)>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->password }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                         <td>
-                            <a href="@{'/admin/edit/' + ${user.id}}">Edit</a>
+                            <a class="float-left" href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href="@{'/admin/delete/' + ${user.id}}">Delete</a>
+                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
+                                @csrf
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="test2">Delete</button>
+                            </form>
+{{--                            <a href="{{ route('admin.users.destroy', $user->id) }}">Delete</a>--}}
                         </td>
-                    </tr>
+                    </tr @endforeach>
                     </tbody>
                 </table>
             </div>

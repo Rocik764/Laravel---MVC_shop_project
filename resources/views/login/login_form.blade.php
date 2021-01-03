@@ -24,34 +24,37 @@
     <div id="content">
         @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <h1>Zaloguj się</h1>
-            <form action="@{/app/login}" method="post" style="max-width: 600px; margin: 0 auto;">
-                <div class="m-3">
-                    <div class="alert alert-error">
-                        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-                    </div>
-                    <div class="alert alert-success">
-                        <p class="text-warning">You have been logged out.</p>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm col-form-label text-center font-weight-bold">E-mail: </label>
-                        <div class="col-8">
-                            <input type="email" name="email" class="form-control" required />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm col-form-label text-center font-weight-bold">Hasło: </label>
-                        <div class="col-8">
-                            <input type="password" name="password" class="form-control" required/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg text-center">
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <main class="py-4">
+                @yield('content')
+            </main>
+{{--            <h1>Zaloguj się</h1>--}}
+{{--            <form action="@{/app/login}" method="post" style="max-width: 600px; margin: 0 auto;">--}}
+{{--                <div class="m-3">--}}
+{{--                    <div class="alert alert-error">--}}
+{{--                        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="alert alert-success">--}}
+{{--                        <p class="text-warning">You have been logged out.</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="form-group row">--}}
+{{--                        <label class="col-sm col-form-label text-center font-weight-bold">E-mail: </label>--}}
+{{--                        <div class="col-8">--}}
+{{--                            <input type="email" name="email" class="form-control" required />--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="form-group row">--}}
+{{--                        <label class="col-sm col-form-label text-center font-weight-bold">Hasło: </label>--}}
+{{--                        <div class="col-8">--}}
+{{--                            <input type="password" name="password" class="form-control" required/>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="form-group row">--}}
+{{--                        <div class="col-lg text-center">--}}
+{{--                            <button type="submit" class="btn btn-primary">Zapisz</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </form>--}}
         </div>
     </div>
 </div>

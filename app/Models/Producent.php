@@ -16,6 +16,7 @@ class Producent extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $table = 'producent';
     protected $fillable = [
         'name',

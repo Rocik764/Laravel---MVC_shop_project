@@ -48,19 +48,29 @@
                         Konto
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{route('admin.users_list')}}">Administracja</a>
                         <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" href="{{route('login.login_form')}}">Zaloguj</a>
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" href="{{route('login.signup_form')}}">Zajerestruj</a>
-
+                        @guest
+                            @if (Route::has('login'))
+                                <a class="dropdown-item" href="{{ route('login') }}">Zaloguj</a>
+                                <div class="dropdown-divider"></div>
+                            @endif
+                            @if (Route::has('register'))
+                                <a class="dropdown-item" href="{{ route('register') }}">Zajerestruj</a>
+                            @endif
+                        @else
+{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+{{--                            {{ Auth::user()->name }}--}}
+{{--                        </a>--}}
                         <a class="dropdown-item" href="{{route('shop.index')}}">Koszyk</a>
                         <div class="dropdown-divider" ></div>
-                        <form class="dropdown-item" action="" method="post">
+                        @can('manage-users')
+                        <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>
+                        @endcan
+                        <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="post">
                             <input type="submit" value="Wyloguj"/>
+                            @csrf
                         </form>
+                        @endguest
                         <!--                        <a class="dropdown-item" id="Logout" th:href="@{/logout}" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">Wyloguj</a>-->
                     </div>
                 </li>

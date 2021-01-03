@@ -16,6 +16,7 @@ class Subcategory extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $table = 'subcategory';
     protected $fillable = [
         'name'
