@@ -35,6 +35,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>Obrazek</th>
                         <th>Nazwa</th>
                         <th>Opis</th>
                         <th>Ilość</th>
@@ -48,6 +49,17 @@
                     <tbody>
 
                     <tr @foreach($produkt as $product)>
+                        <td>
+                            @php
+                                ob_start();
+                                fpassthru($product->image);
+                                $contents = ob_get_contents();
+                                ob_end_clean();
+
+                                $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
+                                echo "<img src='$dataUri' style=\"width: 50px; height: 50px;\"/>";
+                            @endphp
+                        </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->quantity }}</td>

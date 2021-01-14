@@ -4,17 +4,17 @@
 
 <ul class="list-unstyled components">
     <p>Menu podręczne</p>
-    <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Zarządzanie</a>
+    <li @can("manage-products")>
+        <a data-toggle="collapse" aria-expanded="false" href="#homeSubmenu" class="dropdown-toggle">Zarządzanie</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
             <li>
-                <a href="{{route('admin.edit_product')}}">Edytuj produkty</a>
+{{--                <a href="{{route('admin.edit_product')}}">Edytuj produkty</a>--}}
             </li>
             <li>
-                <a href="{{route('admin.new_product')}}">Dodaj produkty</a>
+                <a href="{{route('new_product')}}">Dodaj produkty</a>
             </li>
             <li>
-                <a href="{{route('admin.new_category_subcategory')}}">Dodaj kategorie</a>
+                <a href="{{route('new_category_subcategory')}}">Dodaj kategorie</a>
             </li>
             <li>
 {{--                <a href="{{route('admin.new_user')}}">Dodaj użytowników</a>--}}
@@ -23,47 +23,20 @@
 {{--                <a href="{{route('user.users_list')}}">Edytuj użytowników</a>--}}
             </li>
         </ul>
-    </li>
-    <li>
+    </li @endcan>
+    <li class="active">
         <a href="#">Nowości</a>
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filtry</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
             <li>
-                <a href="#">Page 1</a>
-            </li>
-            <li>
-                <a href="#">Page 2</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
-            </li>
-            <li>
-                <a href="#">Page 3</a>
+                <a href="{{route('show_product')}}">Page 1</a>
             </li>
         </ul>
     </li>
     <li>
-        <a href="{{route('shop.contact')}}">Kontakt</a>
+        <a href="{{route('show_contacts')}}">Kontakt</a>
     </li>
     <li>
-        <a href="{{route('shop.partners')}}">Nasi partnerzy</a>
+        <a href="{{route('show_partners')}}">Nasi partnerzy</a>
     </li>
 </ul>

@@ -25,7 +25,8 @@ class Product extends Model
         'price',
         'category_id',
         'producent_id',
-        'subcategory_id'
+        'subcategory_id',
+        'image'
     ];
 
     public function category() {
@@ -38,5 +39,9 @@ class Product extends Model
 
     public function subcategory() {
         return $this->belongsTo('App\Models\Subcategory');
+    }
+
+    public function getImage() {
+        return $this->image;
     }
 }

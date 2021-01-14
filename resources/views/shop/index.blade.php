@@ -24,7 +24,7 @@
     <div id="content">
         @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <p>coś XD</p>
+            <p>coś</p>
         </div>
     </div>
 </div>

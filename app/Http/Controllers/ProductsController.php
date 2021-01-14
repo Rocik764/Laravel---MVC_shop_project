@@ -1,26 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Category;
+use App\Models\Producent;
+use App\Models\Subcategory;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\Product;
+use Image;
 
 class ProductsController extends Controller
 {
-    public function getProducts() {
-        $produkt = Product::with('category')->with('subcategory')->with('producent')->get();
-        //$produkt = Product::query()->get();
-        return view('shop.show_products', ['produkt' => $produkt]);
-    }
 
-    public function getProductByCategory($category, $subcategory) {
-        $produkt = Product::with('category')
-            ->with('subcategory')
-            ->with('producent')
-            ->where('category_id', $category)
-            ->where('subcategory_id', $subcategory)
-            ->get();
-        return view('shop.show_products', ['produkt' => $produkt]);
+    public function getNewProduct() {
+        $category = Category::all();
+        $subcategory = Subcategory::all();
+        $producent = Producent::all();
+        return view('admin.products.new_product', ['categories'=>$category, 'subcategories'=>$subcategory, 'producents'=>$producent]);
     }
 
     public function getUpdateProduct($id) {
@@ -39,12 +36,14 @@ class ProductsController extends Controller
     }
 
     public function postCreateProduct(Request $request) {
-        $request->validate([
-            'name' => 'required|min:2',
-            'description' => 'required',
-            'quantity' => 'required',
-            'price' => 'required'
-        ]);
+
+        $file = pathinfo($request->input('image'), PATHINFO_EXTENSION);
+        $allowTypes = array('jpg', 'jpeg', 'png');
+        if(in_array($file, $allowTypes)) {
+            $image = $_FILES['image']['tmp_name'];
+            $imgContent = addslashes(file_get_contents($image));
+        } else $imgContent = "test";
+
         $product = new Product([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -53,7 +52,9 @@ class ProductsController extends Controller
             'category_id' => $request->input('category_id'),
             'producent_id' => $request->input('producent_id'),
             'subcategory_id' => $request->input('subcategory_id'),
+            'image' => $imgContent,
         ]);
+
         $product->save();
 
         return redirect()->route('admin.show_products');
@@ -79,5 +80,27 @@ class ProductsController extends Controller
         $product->save();
 
         return redirect()->route('shop.show_products')->with('info', 'Zaktualizowano produkt');
+    }
+
+    public function getNewCatSub() {
+        return view('admin.products.new_category_subcategory');
+    }
+
+    public function postNewCategory(Request $request) {
+        $category = new Category([
+            'name' => $request->input('name'),
+        ]);
+
+        $category->save();
+        return redirect()->route('new_category_subcategory')->with('info', 'Dodano kategorię');
+    }
+
+    public function postNewSubcategory(Request $request) {
+        $subcategory = new Subcategory([
+            'name' => $request->input('name'),
+        ]);
+
+        $subcategory->save();
+        return redirect()->route('new_category_subcategory')->with('info', 'Dodano podkategorię');
     }
 }

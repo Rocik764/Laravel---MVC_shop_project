@@ -31,7 +31,7 @@
                         <button class="btn btn-outline-secondary" type="submit" id="btnSaveMail" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditMail"><span>Edytuj</span></button>
                     </div>
-                    <input type="text" name="email" class="form-control" value="${user.getUsername()}" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="text" name="email" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
                 </div>
             </form>
             <form action="@{/users/editFirstName}" method="post">
@@ -40,7 +40,7 @@
                         <button class="btn btn-outline-secondary" type="submit" id="btnSaveFirstName" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditFirstName"><span>Edytuj</span></button>
                     </div>
-                    <input type="text" name="first_name" class="form-control" value="${user.getName()}" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="text" name="first_name" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
                 </div>
             </form>
             <form action="@{/users/editLastName}" method="post">
@@ -49,7 +49,7 @@
                         <button class="btn btn-outline-secondary" type="submit" id="btnSaveLastName" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditLastName"><span>Edytuj</span></button>
                     </div>
-                    <input type="text" name="last_name" class="form-control" value="${user.getLastName()}" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="text" name="last_name" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
                 </div>
             </form>
             <form action="@{/users/editPassword}" method="post">
@@ -58,7 +58,7 @@
                         <button class="btn btn-outline-secondary" type="submit" id="btnSavePassword" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditPassword"><span>Edytuj</span></button>
                     </div>
-                    <input type="password" name="password" class="form-control" value="${user.getPassword()}" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="password" name="password" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
                 </div>
             </form>
         </div>

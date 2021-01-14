@@ -12,74 +12,89 @@
     <script type="text/javascript" src="{{ asset('/js/sidebar_script.js') }}"></script>
 </head>
 <body>
-@include('admin.products.resources.views.fragments.animated')
+@include('fragments.animated')
 <header>
-    @include('admin.products.resources.views.fragments.menu')
+    @include('fragments.menu')
 </header>
 <div class="wrapper">
     <nav id="sidebar">
-        @include('admin.products.resources.views.fragments.side_menu')
+        @include('fragments.side_menu')
     </nav>
 
     <div id="content">
-        @include('admin.products.resources.views.fragments.side_menu_collapse')
+        @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <h1>Dodaj nowy produkt</h1>
-            <form action="@{/product/saveProduct}" object="${product}" method="post">
-                <div class="form-group row">
-                    <label for="inputFirstName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputFirstName" field="*{name}">
+            <div class="container">
+                <h1>Dodaj nowy produkt</h1>
+                <form action="{{route('create_product')}}" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="inputFirstName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputFirstName" name="name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputLastName" field="*{description}">
+                    <div class="form-group row">
+                        <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputLastName" name="description">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputEmail" field="*{quantity}">
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputEmail" name="quantity">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputPassword" field="*{price}">
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" class="form-control" id="inputPassword" name="price">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
-                    <div class="col-sm-10">
-                        <select id="inputCategory" class="selectpicker" field="*{category}">
-                            <option value="${category.id}">[[${category.name}]]</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
+                        <div class="col-sm-10">
+                            <select id="inputCategory" class="selectpicker" name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Podkategoria</label>
-                    <div class="col-sm-10">
-                        <select id="inputSubategory" class="selectpicker" field="*{subcategory}">
-                            <option value="${subcategory.id}">[[${subcategory.name}]]</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Zwierzę</label>
+                        <div class="col-sm-10">
+                            <select id="inputSubategory" class="selectpicker" name="subcategory_id">
+                                @foreach($subcategories as $subcategory)
+                                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputProducent" class="col-sm col-form-label text-center font-weight-bold">Producent</label>
-                    <div class="col-sm-10">
-                        <select id="inputProducent" class="selectpicker" field="*{producent}">
-                            <option value="${producent.id}">[[${producent.name}]]</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="inputProducent" class="col-sm col-form-label text-center font-weight-bold">Producent</label>
+                        <div class="col-sm-10">
+                            <select id="inputProducent" class="selectpicker" name="producent_id">
+                                @foreach($producents as $producent)
+                                    <option value="{{ $producent->id }}">{{ $producent->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg text-center">
-                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                    <div class="form-group row">
+                        <label for="exampleFormControlFile1" class="col-sm col-form-label text-center font-weight-bold">Obrazek</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg" required>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group row">
+                        <div class="col-lg text-center">
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </div>
+                    @csrf
+                </form>
+            </div>
         </div>
     </div>
 </div>

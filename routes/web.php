@@ -14,40 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 //  SHOP
-Route::get('/', function () {
-    return view('shop.index');
-})->name('shop.index');
-Route::get('/contact', function () {
-    return view('shop.contact');
-})->name('shop.contact');
-Route::get('/partners', 'AppController@getProducents')->name('shop.partners');
-Route::get('/schronisko', function () {
-    return view('shop.schronisko');
-})->name('shop.schronisko');
-Route::get('/products', function () {
-    return view('shop.show_product');
-})->name('shop.show_product');
-//-------------------------------------------
-Route::get('product', 'ProductsController@getProducts')->name('shop.show_products');
-Route::get('product/{category}/{subcategory}','ProductsController@getProductByCategory')->name('shop.show_products_cat_sub');
-    //'App\Http\Controllers\ProductsController@getProductByCategory')->name('shop.show_products');
-
-//  ADMIN
-Route::get('/admin/edit_product', function () {
-    return view('admin.edit_product');
-})->name('admin.edit_product');
+Route::group(['prefix' => 'shop'], function() {
+    Route::get('index', 'AppController@getIndex')->name('show_index');
+    Route::get('contact', 'AppController@showContact')->name('show_contacts');
+    Route::get('partners', 'AppController@getPartners')->name('show_partners');
+    Route::get('schronisko', 'AppController@getSchronisko')->name('show_schronisko');
+    Route::get('product', 'AppController@getProducts')->name('show_product');
+    Route::get('products/{category}/{subcategory}','AppController@getProductByCategory')->name('show_products');
+});
 
 //Route::get('/admin/edit_user', function () {
 //    return view('admin.edit_user');
 //})->name('admin.edit_user');
-
-Route::get('/admin/category', function () {
-    return view('admin.new_category_subcategory');
-})->name('admin.new_category_subcategory');
-
-Route::get('/admin/new_product', function () {
-    return view('admin.new_product');
-})->name('admin.new_product');
 
 //Route::get('/admin/new_user', function () {
 //    return view('admin.new_user');
@@ -62,22 +40,16 @@ Route::get('/admin/new_product', function () {
 //});
 
 Route::group(['prefix' => 'manage'], function() {
-    Route::post('create', 'ProductsController@postCreateProduct')->name('manage.create');
-    Route::get('update/{id}', 'ProductsController@getUpdateProduct')->name('manage.update');
-    Route::post('update/{id}', 'ProductsController@postUpdateProduct')->name('manage.update');
-    Route::get('delete/{id}', 'ProductsController@getDeleteProduct')->name('manage.delete');
+    Route::get('show', 'ProductsController@getProducts')->name('show_products');
+    Route::post('create', 'ProductsController@postCreateProduct')->name('create_product');
+    Route::get('update/{id}', 'ProductsController@getUpdateProduct')->name('update_product_get');
+    Route::post('update/{id}', 'ProductsController@postUpdateProduct')->name('update_product_post');
+    Route::get('delete/{id}', 'ProductsController@getDeleteProduct')->name('delete_product');
+    Route::get('newproduct', 'ProductsController@getNewProduct')->name('new_product');
+    Route::get('category_subcategory', 'ProductsController@getNewCatSub')->name('new_category_subcategory');
+    Route::post('new_category', 'ProductsController@postNewCategory')->name('create_category');
+    Route::post('new_subcategory', 'ProductsController@postNewSubcategory')->name('create_subcategory');
 });
-
-//  LOGIN
-Route::get('/login/login', function () {
-    return view('login.login_form');
-})->name('login.login_form');
-Route::get('/login/signup', function () {
-    return view('login.signup_form');
-})->name('login.signup_form');
-Route::get('/login/success', function () {
-    return view('login.register_success');
-})->name('login.register_success');
 
 //  USER
 Route::get('/login/profile', function () {
@@ -87,8 +59,6 @@ Route::get('/login/profile', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource("/users", UsersController::class, ["except"=>["show","create","store"]]);

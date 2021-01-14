@@ -12,53 +12,62 @@
     <script type="text/javascript" src="{{ asset('/js/sidebar_script.js') }}"></script>
 </head>
 <body>
-@include('admin.products.resources.views.fragments.animated')
+@include('fragments.animated')
 <header>
-    @include('admin.products.resources.views.fragments.menu')
+    @include('fragments.menu')
 </header>
 <div class="wrapper">
     <nav id="sidebar">
-        @include('admin.products.resources.views.fragments.side_menu')
+        @include('fragments.side_menu')
     </nav>
 
     <div id="content">
-        @include('admin.products.resources.views.fragments.side_menu_collapse')
+        @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <h1>Dodaj nową kategorię</h1>
-                        <form action="#" action="@{/product/saveCategory}" object="${category}" method="post">
+                        <form action="{{ route('create_category') }}" method="post">
                             <div class="form-group row">
                                 <label for="inputCategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control text-center" id="inputCategory" field="*{name}" required>
+                                    <input type="text" class="form-control text-center" id="inputCategory" name="name" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row mt-2">
                                 <div class="col-lg text-center">
                                     <button type="submit" class="btn btn-primary">Zapisz</button>
                                 </div>
                             </div>
+                            @csrf
                         </form>
                     </div>
                     <div class="col-12 col-sm-6">
                         <h1>Dodaj nową podkategorię</h1>
-                        <form action="#" action="@{/product/saveSubcategory}" object="${subcategory}" method="post">
+                        <form action="{{ route('create_subcategory') }}" method="post">
                             <div class="form-group row">
                                 <label for="inputSubcategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control text-center" id="inputSubcategory" field="*{name}" required>
+                                    <input type="text" class="form-control text-center" id="inputSubcategory" name="name" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-lg text-center">
+                                <div class="col-lg text-center mt-2">
                                     <button type="submit" class="btn btn-primary">Zapisz</button>
                                 </div>
                             </div>
+                            @csrf
                         </form>
                     </div>
                 </div>
+                @if(\Illuminate\Support\Facades\Session::has('info'))
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -26,50 +26,82 @@
         <div id="content-main">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <p>
-                            iteracja: [[${iteration.index}]]<br/>
-                            Nazwa: [[${product.name}]]<br/>
-                            Opis: [[${product.description}]]<br/>
-                            Ilość: [[${product.quantity}]]<br/>
-                            Cena: [[${product.price}]]<br/>
-                            Kategoria: [[${product.category.getName()}]]<br/>
-                        </p>
-                    </div>
+{{--                    th:each="product, iteration : ${productList}" th:if="${iteration.index < 4}"--}}
+                    @foreach($produkt as $product)
+                    @if($loop->index < 4)
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="rounded shadow-sm productItem">
+    {{--                            <a th:href="@{'/product/productInfo/' + ${product.id}}">--}}
+                                @php
+                                    ob_start();
+                                    fpassthru($product->image);
+                                    $contents = ob_get_contents();
+                                    ob_end_clean();
+
+                                    $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
+                                    echo "<img src='$dataUri' style=\"width: 250px; height: 250px;\"/>";
+                                @endphp
+                                    <div class="p-4">
+                                        <p class="small text-white mb-0">
+                                            <b>{{ $product->name }}</b><br/>
+                                            Ilość: {{ $product->quantity }}<br/>
+                                            Cena: {{ $product->price }}<br/>
+                                        </p>
+                                    </div>
+    {{--                            </a>--}}
+                            </div>
+                        </div>
+                    @endif
+                    @endforeach
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <p>
-                            iteracja: [[${iteration.index}]]<br/>
-                            Nazwa: [[${product.name}]]<br/>
-                            Opis: [[${product.description}]]<br/>
-                            Ilość: [[${product.quantity}]]<br/>
-                            Cena: [[${product.price}]]<br/>
-                            Kategoria: [[${product.category.getName()}]]<br/>
-                        </p>
-                    </div>
+                    @foreach($produkt as $product)
+                    @if($loop->index >= 4)
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="rounded shadow-sm productItem">
+                                {{--                            <a th:href="@{'/product/productInfo/' + ${product.id}}">--}}
+                                @php
+                                    ob_start();
+                                    fpassthru($product->image);
+                                    $contents = ob_get_contents();
+                                    ob_end_clean();
+
+                                    $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
+                                    echo "<img src='$dataUri' style=\"width: 250px; height: 250px;\"/>";
+                                @endphp
+                                <div class="p-4">
+                                    <p class="small text-white mb-0">
+                                        <b>{{ $product->name }}</b><br/>
+                                        Ilość: {{ $product->quantity }}<br/>
+                                        Cena: {{ $product->price }}<br/>
+                                    </p>
+                                </div>
+                                {{--                            </a>--}}
+                            </div>
+                        </div>
+                    @endif
+                    @endforeach
                 </div>
-                <div>
-                    <div class = "row">
-                        <div class = "col-12 col-md-4">
-                            Total Rows: [[${totalItems}]]
-                        </div>
-                        <div class = "col-12 col-md-4">
-                        <span>
-                            <a href="@{'/product/page/' + ${i}}">[[${i}]]</a>
-                            <span>[[${i}]]</span>  &nbsp; &nbsp;
-                        </span>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <a href="@{'/product/page/' + ${currentPage + 1}}">Next</a>
-                            <span>Next</span>
-                            <a href="@{'/product/page/' + ${currentPage - 1}}">Previous</a>
-                            <span>Previous</span>
-                            <a href="@{'/product/page/' + ${totalPages}}">Last</a>
-                            <span>Last</span>
-                        </div>
-                    </div>
-                </div>
+                <div>{{ $produkt->count() }}</div>
+                <div><p></p></div>
+{{--                <div th:if = "${totalPages > 1}">--}}
+{{--                    <div class = "row">--}}
+{{--                        <div class = "col-12 col-md-4">--}}
+{{--                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">--}}
+{{--                            <a th:if="${currentPage != i}" th:href="@{'/product/page/' + ${i}}">[[${i}]]</a>--}}
+{{--                            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;--}}
+{{--                        </span>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-12 col-md-4">--}}
+{{--                            <a th:if="${currentPage < totalPages}" th:href="@{'/product/page/' + ${currentPage + 1}}">Next</a>--}}
+{{--                            <span th:unless="${currentPage < totalPages}">Next</span>--}}
+{{--                            <a th:if="${currentPage != 0}" th:href="@{'/product/page/' + ${currentPage - 1}}">Previous</a>--}}
+{{--                            <span th:unless="${currentPage != 0}">Previous</span>--}}
+{{--                            <a th:if="${currentPage < totalPages}" th:href="@{'/product/page/' + ${totalPages}}">Last</a>--}}
+{{--                            <span th:unless="${currentPage < totalPages}">Last</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

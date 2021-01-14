@@ -10,7 +10,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-head">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{route('shop.index')}}"><img src="{{ asset('/img/fox_logo.png') }}" width="50" height="50" alt="logo"/> Zoologiczny.pl</a>
+        <a class="navbar-brand" href="{{route('show_index')}}"><img src="{{ asset('/img/fox_logo.png') }}" width="50" height="50" alt="logo"/> Zoologiczny.pl</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,7 +19,7 @@
 
             <ul class="navbar-nav ml-auto d-flex test">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{route('shop.index')}}">Home</a>
+                    <a class="nav-link" href="{{route('show_index')}}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Schronisko</a>
@@ -30,17 +30,17 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <div class="dropdown-header">Dla psa</div>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 1, 'subcategory' => 1])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 2, 'subcategory' => 1])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 3, 'subcategory' => 1])}}">Akcesoria</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 1])}}">Zabawki</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 1])}}">Karma</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 1])}}">Akcesoria</a>
                         <div class="dropdown-header">Dla kota</div>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 1, 'subcategory' => 2])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 2, 'subcategory' => 2])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 3, 'subcategory' => 2])}}">Akcesoria</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 2])}}">Zabawki</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 2])}}">Karma</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 2])}}">Akcesoria</a>
                         <div class="dropdown-header">Dla ryb</div>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 1, 'subcategory' => 3])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 2, 'subcategory' => 3])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('shop.show_products_cat_sub', ['category' => 3, 'subcategory' => 3])}}">Akcesoria</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 3])}}">Zabawki</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 3])}}">Karma</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 3])}}">Akcesoria</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -61,7 +61,7 @@
 {{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
 {{--                            {{ Auth::user()->name }}--}}
 {{--                        </a>--}}
-                        <a class="dropdown-item" href="{{route('shop.index')}}">Koszyk</a>
+                        <a class="dropdown-item" href="{{route('show_index')}}">Koszyk</a>
                         <div class="dropdown-divider" ></div>
                         @can('manage-users')
                         <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>
