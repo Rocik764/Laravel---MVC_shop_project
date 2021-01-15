@@ -31,7 +31,7 @@ class AppController extends Controller
             ->where('subcategory_id', $subcategory)
             ->get();
 
-        return view('admin.products.show_products', ['produkt' => $produkt]);
+        return view('shop.show_product', ['produkt' => $produkt]);
     }
 
     public function getProducts() {
@@ -39,6 +39,10 @@ class AppController extends Controller
         return view('shop.show_product', ['produkt' => $produkt]);
     }
 
+    public function getShowProductInfo($id) {
+        $product = Product::query()->find($id);
+        return view('shop.product_info', ['product' => $product]);
+    }
 //    public function getProductByCategory($category, $subcategory) {
 //        $produkt = Product::with('category')
 //            ->with('subcategory')

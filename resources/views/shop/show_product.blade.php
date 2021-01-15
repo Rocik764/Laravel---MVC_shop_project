@@ -31,7 +31,7 @@
                     @if($loop->index < 4)
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm productItem">
-    {{--                            <a th:href="@{'/product/productInfo/' + ${product.id}}">--}}
+                                <a href="{{ route('show_product_info', $product->id) }}">
                                 @php
                                     ob_start();
                                     fpassthru($product->image);
@@ -48,7 +48,7 @@
                                             Cena: {{ $product->price }}<br/>
                                         </p>
                                     </div>
-    {{--                            </a>--}}
+                                </a>
                             </div>
                         </div>
                     @endif
@@ -59,7 +59,7 @@
                     @if($loop->index >= 4)
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm productItem">
-                                {{--                            <a th:href="@{'/product/productInfo/' + ${product.id}}">--}}
+                                <a href="{{ route('show_product_info', $product->id) }}">
                                 @php
                                     ob_start();
                                     fpassthru($product->image);
@@ -76,7 +76,7 @@
                                         Cena: {{ $product->price }}<br/>
                                     </p>
                                 </div>
-                                {{--                            </a>--}}
+                                </a>
                             </div>
                         </div>
                     @endif

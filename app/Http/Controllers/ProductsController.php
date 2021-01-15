@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CartItems;
 use App\Models\Category;
 use App\Models\Producent;
 use App\Models\Subcategory;

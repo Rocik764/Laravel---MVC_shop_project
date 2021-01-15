@@ -61,7 +61,7 @@
 {{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
 {{--                            {{ Auth::user()->name }}--}}
 {{--                        </a>--}}
-                        <a class="dropdown-item" href="{{route('show_index')}}">Koszyk</a>
+                        <a class="dropdown-item" href="{{route('show_cart')}}">Koszyk</a>
                         <div class="dropdown-divider" ></div>
                         @can('manage-users')
                         <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>
