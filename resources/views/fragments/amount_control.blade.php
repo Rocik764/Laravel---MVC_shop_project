@@ -5,7 +5,7 @@
                 <a class="page-link minus" href="" id="<?php echo $product->id ?>" style="height: 38px;"><b>-</b></a>
             </li>
             <li class="page-item">
-                <input type="text" value="1" class="form-control text-center"
+                <input type="text" value="{{ $amountValue }}" class="form-control text-center"
                        onkeydown="return false;" style="max-width: 55px"
                        id="<?php echo 'amount'.$product->id ?>"/>
             </li>

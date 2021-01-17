@@ -26,4 +26,8 @@ class CartItems extends Model
     public function product() {
         return $this->belongsTo('App\Models\Product');
     }
+
+    public function getSubtotal() {
+        return $this->product->price * $this->amount;
+    }
 }

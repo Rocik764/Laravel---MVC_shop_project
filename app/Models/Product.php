@@ -44,4 +44,8 @@ class Product extends Model
     public function getImage() {
         return $this->image;
     }
+
+    public function getPrice() {
+        return $this->price;
+    }
 }

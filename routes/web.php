@@ -55,6 +55,8 @@ Route::group(['prefix' => 'manage'], function() {
 Route::group(['prefix' => 'cart'], function() {
     Route::get('show_cart', 'ShoppingCartController@showCart')->name('show_cart');
     Route::post('/add','ShoppingCartController@addToCart');
+    Route::post('/remove/{productId}/{amount}','ShoppingCartController@removeFromCart');
+    Route::post('/update','ShoppingCartController@updateCart');
 });
 
 Route::get('/login/profile', function () {

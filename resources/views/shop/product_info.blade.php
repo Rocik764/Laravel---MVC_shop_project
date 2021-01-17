@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-md-2">
                             <div>
-                                @include('fragments.amount_control')
+                                @include('fragments.amount_control', ['amountValue' => 1])
                             </div>
                             <div class="mt-2">
                                 <button class="btn btn-primary" id="buttonAddToCart">Dodaj do koszyka</button>
