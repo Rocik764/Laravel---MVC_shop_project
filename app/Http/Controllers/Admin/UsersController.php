@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -22,8 +23,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.users_list')->with('users', $users);
+        return view('admin.users.users_list')->with('users', User::paginate(10));
     }
 
     /**
@@ -36,6 +36,9 @@ class UsersController extends Controller
     {
         if(Gate::denies('edit-users')) {
             return redirect(route('admin.users.index'));
+        }
+        if(Auth::user()->id == $user->id) {
+            return redirect()->route('admin.users.index');
         }
 
         $roles = Role::all();

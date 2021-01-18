@@ -48,7 +48,6 @@
                         Konto
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-divider"></div>
                         @guest
                             @if (Route::has('login'))
                                 <a class="dropdown-item" href="{{ route('login') }}">Zaloguj</a>
@@ -62,10 +61,11 @@
 {{--                            {{ Auth::user()->name }}--}}
 {{--                        </a>--}}
                         <a class="dropdown-item" href="{{route('show_cart')}}">Koszyk</a>
-                        <div class="dropdown-divider" ></div>
                         @can('manage-users')
+                        <div class="dropdown-divider" ></div>
                         <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>
                         @endcan
+                        <div class="dropdown-divider"></div>
                         <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="post">
                             <input type="submit" value="Wyloguj"/>
                             @csrf

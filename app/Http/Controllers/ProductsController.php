@@ -13,6 +13,10 @@ use Image;
 
 class ProductsController extends Controller
 {
+    public function getProducts() {
+        $products = Product::with('category')->with('subcategory')->with('producent')->get();
+        return view('admin.products.show_products', ['products' => $products]);
+    }
 
     public function getNewProduct() {
         $category = Category::all();
@@ -23,7 +27,13 @@ class ProductsController extends Controller
 
     public function getUpdateProduct($id) {
         $product = Product::query()->find($id);
-        return view('admin.edit_product', ['formType' => 'update', 'product' => $product, 'productId' => $id]);
+        $category = Category::all();
+        $subcategory = Subcategory::all();
+        $producent = Producent::all();
+        return view('admin.products.edit_product', ['formType' => 'update', 'product' => $product, 'productId' => $id,
+            'categories'=>$category,
+            'subcategories'=>$subcategory,
+            'producents'=>$producent]);
     }
 
     public function getDeleteProduct($id) {
@@ -31,9 +41,9 @@ class ProductsController extends Controller
         try {
             $product->delete();
         } catch (Exception $e) {
-            return back()->withErrors('delete.fail', 'Niepowodzenie usuwania projektu');
+            return back()->withErrors('delete.fail', 'Niepowodzenie usuwania produktu');
         }
-        return redirect()->route('shop.show_products');
+        return redirect()->route('list_products');
     }
 
     public function postCreateProduct(Request $request) {

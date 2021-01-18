@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Edytuj produkt</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -12,73 +12,87 @@
     <script type="text/javascript" src="{{ asset('/js/sidebar_script.js') }}"></script>
 </head>
 <body>
-@include('admin.products.resources.views.fragments.animated')
+@include('fragments.animated')
 <header>
-    @include('admin.products.resources.views.fragments.menu')
+    @include('fragments.menu')
 </header>
 <div class="wrapper">
     <nav id="sidebar">
-        @include('admin.products.resources.views.fragments.side_menu')
+        @include('fragments.side_menu')
     </nav>
 
     <div id="content">
-        @include('admin.products.resources.views.fragments.side_menu_collapse')
+        @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <h1>Edytuj produkt z ID:</h1>
-            @if(!isset($formType))
-            @elseif($formType === 'update')
-            <form action="{{ route('manage.update', ['id' => $productId]) }}" method="post">
-                <input type="input" name="id" value="{{ $productId }}">
-                <div class="form-group row">
-                    <label for="inputName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
-                    <div class="col-sm-11">
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputDescription" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
-                    <div class="col-sm-11">
-                        <input type="text" class="form-control" id="description" name="description" value="{{ $product->description }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputQuantity" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
-                    <div class="col-sm-11">
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
-                    <div class="col-sm-11">
-                        <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
-                    <div class="col-sm-11">
-                        <input type="number" class="form-control" id="category_id" name="category_id" value="{{ $product->category_id }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Producent</label>
-                    <div class="col-sm-11">
-                        <input type="number" class="form-control" id="producent_id" name="producent_id" value="{{ $product->producent_id }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Podkategoria</label>
-                    <div class="col-sm-11">
-                        <input type="number" class="form-control" id="subcategory_id" name="subcategory_id" value="{{ $product->subcategory_id }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg text-center">
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary">Zapisz</button>
-                    </div>
-                </div>
-            </form>
-            @endif
+            <div class="container">
+                <h1>Edytuj produkt z ID:</h1>
+                @if(!isset($formType))
+                @elseif($formType === 'update')
+                    <form action="{{ route('update_product_post', ['id' => $productId]) }}" method="post">
+                        <input type="input" name="id" value="{{ $productId }}" hidden>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDescription" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="description" name="description" value="{{ $product->description }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputQuantity" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
+                            <div class="col-sm-10">
+                                <select id="inputCategory" class="selectpicker" name="category_id" >
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" @if($product->category->id == $category->id) selected @endif>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Zwierzę</label>
+                            <div class="col-sm-10">
+                                <select id="inputSubategory" class="selectpicker" name="subcategory_id">
+                                    @foreach($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}" @if($product->subcategory->id == $subcategory->id) selected @endif>{{ $subcategory->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputProducent" class="col-sm col-form-label text-center font-weight-bold">Producent</label>
+                            <div class="col-sm-10">
+                                <select id="inputProducent" class="selectpicker" name="producent_id">
+                                    @foreach($producents as $producent)
+                                        <option value="{{ $producent->id }}" @if($product->producent->id == $producent->id) selected @endif>{{ $producent->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg text-center">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-primary">Zapisz</button>
+                            </div>
+                        </div>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 </div>

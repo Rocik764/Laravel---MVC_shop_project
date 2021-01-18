@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Lista produktów</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
 
-                    <tr @foreach($produkt as $product)>
+                    <tr @foreach($products as $product)>
                         <td>
                             @php
                                 ob_start();
@@ -68,9 +68,9 @@
                         <td>{{ $product->subcategory->name }}</td>
                         <td>{{ $product->producent->name }}</td>
                         <td>
-                            <a href="{{ route('manage.update', ['id' => $product->id]) }}">Edit</a>
+                            <a href="{{ route('update_product_get', ['id' => $product->id]) }}">Edit</a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href="{{ route('manage.delete', ['id' => $product->id]) }}">Delete</a>
+                            <a href="{{ route('delete_product', ['id' => $product->id]) }}">Delete</a>
                         </td>
                     </tr @endforeach>
                     </tbody>

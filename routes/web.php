@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'shop'], function() {
 //    Route::get('delete/{id}', 'App\Http\Controllers\UsersControllerOld@getDeleteUser')->name('user.delete');
 //});
 
-Route::group(['prefix' => 'manage'], function() {
+Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth.admin'], function() {
     Route::post('create', 'ProductsController@postCreateProduct')->name('create_product');
     Route::get('update/{id}', 'ProductsController@getUpdateProduct')->name('update_product_get');
     Route::post('update/{id}', 'ProductsController@postUpdateProduct')->name('update_product_post');
@@ -49,6 +50,7 @@ Route::group(['prefix' => 'manage'], function() {
     Route::get('category_subcategory', 'ProductsController@getNewCatSub')->name('new_category_subcategory');
     Route::post('new_category', 'ProductsController@postNewCategory')->name('create_category');
     Route::post('new_subcategory', 'ProductsController@postNewSubcategory')->name('create_subcategory');
+    Route::get('list_products', 'ProductsController@getProducts')->name('list_products');
 });
 
 //  USER
@@ -70,5 +72,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
-    Route::resource("/users", UsersController::class, ["except"=>["show","create","store"]]);
+    Route::resource("/users", 'UsersController', ["except"=>["show","create","store"]]);
 });

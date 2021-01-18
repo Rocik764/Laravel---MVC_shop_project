@@ -8,7 +8,7 @@
         <a data-toggle="collapse" aria-expanded="false" href="#homeSubmenu" class="dropdown-toggle">Zarządzanie</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
             <li>
-{{--                <a href="{{route('admin.edit_product')}}">Edytuj produkty</a>--}}
+                <a href="{{route('list_products')}}">Edytuj produkty</a>
             </li>
             <li>
                 <a href="{{route('new_product')}}">Dodaj produkty</a>
@@ -20,7 +20,7 @@
 {{--                <a href="{{route('admin.new_user')}}">Dodaj użytowników</a>--}}
             </li>
             <li>
-{{--                <a href="{{route('user.users_list')}}">Edytuj użytowników</a>--}}
+                <a href="{{route('admin.users.index')}}">Edytuj użytowników</a>
             </li>
         </ul>
     </li @endcan>
