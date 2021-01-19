@@ -24,12 +24,34 @@
             </li>
         </ul>
     </li @endcan>
-    <li class="active">
-        <a href="#">Nowości</a>
+    <li>
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filtry</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
+            <form action="{{ route('side_menu_filtering') }}" method="POST">
+                <li>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="filterWord" placeholder="Czego szukasz?">
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label for="price-from">Cena od</label>
+                        <input type="number" step="0.01" class="form-control" id="price-from" name="filterPriceFrom" min="0">
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label for="price-to">Cena do</label>
+                        <input type="number" step="0.01" class="form-control" id="price-to" name="filterPriceTo" min="0">
+                    </div>
+                </li>
+                <li>
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-secondary">Szukaj</button>
+                </li>
+            </form>
             <li>
-                <a href="{{route('show_product')}}">Page 1</a>
+                <a href="{{ route('get_filtering') }}">Więcej filtrów</a>
             </li>
         </ul>
     </li>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Index</title>
+    <title>Koszyk</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -29,54 +29,50 @@
                 <p>Koszyk użytkownika: {{ Auth::user()->name }}</p>
                 <div class="row m-1">
                     <div class="col-lg-8">
-                        @if(\Illuminate\Support\Facades\Session::has('info'))
-                            <div class="row">
-                                <div class="col-md-12 mt-5">
-                                    <h2>{{ \Illuminate\Support\Facades\Session::get('info') }}</h2>
-                                </div>
-                            </div>
-                        @else
-                        @foreach($cart as $item)
-{{--                            <div class="row border rounded" th:with="product = ${item.product}" th:id="'row' + ${status.count}">--}}
-                            <div class="row border rounded" id="<?php echo 'row'.$loop->index ?>">
-                                <div class="col-lg-1">
-{{--                                    <div class="mt-2">[[${status.count}]]</div>--}}
-                                    <div class="mt-2">
-                                        <a class="link-remove" href="{{ '/cart/remove/'.$item->product->id.'/'.$item->amount }}" id="{{ $loop->index }}">
-                                            <img src="{{ asset('/img/removeFromCart.png') }}" alt="remove"/>
-                                        </a>
+                        @php if($cart == null) { @endphp
+                            <p class="alert alert-info">Brak produktów w koszyku.</p
+                        @php } else { @endphp
+                            @foreach($cart as $item)
+    {{--                            <div class="row border rounded" th:with="product = ${item.product}" th:id="'row' + ${status.count}">--}}
+                                <div class="row border rounded" id="<?php echo 'row'.$loop->index ?>">
+                                    <div class="col-lg-1">
+    {{--                                    <div class="mt-2">[[${status.count}]]</div>--}}
+                                        <div class="mt-2">
+                                            <a class="link-remove" href="{{ '/cart/remove/'.$item->product->id.'/'.$item->amount }}" id="{{ $loop->index }}">
+                                                <img src="{{ asset('/img/removeFromCart.png') }}" alt="remove"/>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    @php
-                                        ob_start();
-                                        fpassthru($item->product->image);
-                                        $contents = ob_get_contents();
-                                        ob_end_clean();
+                                    <div class="col-lg-5">
+                                        @php
+                                            ob_start();
+                                            fpassthru($item->product->image);
+                                            $contents = ob_get_contents();
+                                            ob_end_clean();
 
-                                        $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
-                                        echo "<img src='$dataUri' alt=\"obrazek\" style=\"height: 250px;\"/>";
-                                    @endphp
+                                            $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
+                                            echo "<img src='$dataUri' alt=\"obrazek\" style=\"height: 250px;\"/>";
+                                        @endphp
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div>
+                                            <a href="{{ route('show_product_info', $item->product->id) }}"><b>{{ $item->product->name }}</b></a>
+                                        </div>
+                                        <div>
+    {{--                                        <div th:replace="/fragments/amount_control :: amount_control(${item.amount}, ${item.product.id})">Ilość</div>--}}
+                                            @include('fragments.amount_control', ['product' => $item->product, 'amountValue' => $item->amount])
+                                        </div>
+                                        <div>
+                                            <span>x</span>
+                                            <span>{{ $item->product->price }}&nbsp;zł</span>
+                                        </div>
+                                        <div>
+                                            <span>=&nbsp;</span><span class="h4 productSubtotal" id="<?php echo 'subtotal'.$item->product->id?>">{{ $item->getSubtotal() }}</span><span class="h4">&nbsp;zł</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div>
-                                        <a href="{{ route('show_product_info', $item->product->id) }}"><b>{{ $item->product->name }}</b></a>
-                                    </div>
-                                    <div>
-{{--                                        <div th:replace="/fragments/amount_control :: amount_control(${item.amount}, ${item.product.id})">Ilość</div>--}}
-                                        @include('fragments.amount_control', ['product' => $item->product, 'amountValue' => $item->amount])
-                                    </div>
-                                    <div>
-                                        <span>x</span>
-                                        <span>{{ $item->product->price }}&nbsp;zł</span>
-                                    </div>
-                                    <div>
-                                        <span>=&nbsp;</span><span class="h4 productSubtotal" id="<?php echo 'subtotal'.$item->product->id?>">{{ $item->getSubtotal() }}</span><span class="h4">&nbsp;zł</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row m-1">&nbsp;</div>
-                        @endforeach
+                                <div class="row m-1">&nbsp;</div>
+                            @endforeach
                     </div>
                     <div class="col-lg-4">
                         <div>
@@ -86,10 +82,10 @@
                             <span class="h2" id="totalAmount"></span>
                         </div>
                         <div class="mt-2">
-                            <a href="#"><button class="btn btn-danger p-3 mt-2">Zakup</button></a>
+                            <a href="{{ route('show_order_info') }}"><button class="btn btn-danger p-3 mt-2">Zakup</button></a>
                         </div>
                     </div>
-                    @endif
+                    @php } @endphp
                 </div>
             </div>
         </div>
@@ -97,8 +93,5 @@
 </div>
 @include('fragments.standard_modal')
 <script type="text/javascript" src="{{ asset('/js/shopping_cart_update_total.js') }}"></script>
-<script type="text/javascript">
-    //const productId = "{{ $item->product->id }}";
-</script>
 </body>
 </html>

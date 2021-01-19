@@ -49,7 +49,10 @@
                             <p class="small text-white mb-0">
                                 Opis: {{ $product->description }}<br/>
                                 Ilość: {{ $product->quantity }}<br/>
-                                Cena: {{ $product->price }}
+                                Cena: {{ $product->price }}<br/>
+                                Kategoria: {{ $product->category->name }}<br/>
+                                Zwierzę: {{ $product->subcategory->name }}<br/>
+                                Producent: {{ $product->producent->name }}
                             </p>
                         </div>
                         <div class="col-md-2">

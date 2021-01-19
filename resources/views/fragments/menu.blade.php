@@ -44,7 +44,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{route('user.user_profile')}}" role="button">
+                    <a class="nav-link dropdown-toggle" href="#" role="button">
                         Konto
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,10 +57,16 @@
                                 <a class="dropdown-item" href="{{ route('register') }}">Zajerestruj</a>
                             @endif
                         @else
-{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                            {{ Auth::user()->name }}--}}
-{{--                        </a>--}}
+                        <a class="dropdown-item" href="{{route('show_profile')}}">Profil</a>
+                        <div class="dropdown-divider" ></div>
                         <a class="dropdown-item" href="{{route('show_cart')}}">Koszyk</a>
+                        <div class="dropdown-divider" ></div>
+                        <a class="dropdown-item" href="{{route('show_orders')}}">Moje zamówienia</a>
+                        @can("manage-products")
+                        <div class="dropdown-divider" ></div>
+                        <a class="dropdown-item" href="{{route('list_orders')}}">Zamówienia</a>
+
+                        @endcan
                         @can('manage-users')
                         <div class="dropdown-divider" ></div>
                         <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>

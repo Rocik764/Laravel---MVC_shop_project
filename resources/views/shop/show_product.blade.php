@@ -27,7 +27,7 @@
             <div class="container">
                 <div class="row">
 {{--                    th:each="product, iteration : ${productList}" th:if="${iteration.index < 4}"--}}
-                    @foreach($produkt as $product)
+                    @foreach($products as $product)
                     @if($loop->index < 4)
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm productItem">
@@ -55,7 +55,7 @@
                     @endforeach
                 </div>
                 <div class="row">
-                    @foreach($produkt as $product)
+                    @foreach($products as $product)
                     @if($loop->index >= 4)
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm productItem">
@@ -82,7 +82,7 @@
                     @endif
                     @endforeach
                 </div>
-                <div>{{ $produkt->count() }}</div>
+                <div>{{ $products->count() }}</div>
                 <div><p></p></div>
 {{--                <div th:if = "${totalPages > 1}">--}}
 {{--                    <div class = "row">--}}

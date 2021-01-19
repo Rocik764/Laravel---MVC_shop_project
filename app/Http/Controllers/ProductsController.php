@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\CartItems;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Producent;
 use App\Models\Subcategory;
 use Exception;
@@ -113,5 +114,17 @@ class ProductsController extends Controller
 
         $subcategory->save();
         return redirect()->route('new_category_subcategory')->with('info', 'Dodano podkategorię');
+    }
+
+    public function getOrders() {
+        $orders = Order::with('user')->get();
+        return view('admin.orders.orders_list', ['orders' => $orders]);
+    }
+
+    public function completeOrder($id) {
+        $order = Order::query()->find($id);
+        $value = !$order->is_completed;
+        $order->is_completed = $value;
+        $order->save();
     }
 }

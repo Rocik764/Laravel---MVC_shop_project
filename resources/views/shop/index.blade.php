@@ -24,7 +24,16 @@
     <div id="content">
         @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <p>coś</p>
+            <div class="container">
+                <h1>Strona główna</h1>
+                @if(\Illuminate\Support\Facades\Session::has('info'))
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </div>

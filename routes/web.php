@@ -23,23 +23,10 @@ Route::group(['prefix' => 'shop'], function() {
     Route::get('product', 'AppController@getProducts')->name('show_product');
     Route::get('products/{category}/{subcategory}','AppController@getProductByCategory')->name('show_products');
     Route::get('product/{id}','AppController@getShowProductInfo')->name('show_product_info');
+    Route::post('side_menu_filtering','AppController@postSideMenuFiltering')->name('side_menu_filtering');
+    Route::post('filteringPost','AppController@postFiltering')->name('post_filtering');
+    Route::get('filtering','AppController@getFiltering')->name('get_filtering');
 });
-
-//Route::get('/admin/edit_user', function () {
-//    return view('admin.edit_user');
-//})->name('admin.edit_user');
-
-//Route::get('/admin/new_user', function () {
-//    return view('admin.new_user');
-//})->name('admin.new_user');
-
-//Route::group(['prefix' => 'user'], function() {
-//    Route::get('users_list', 'App\Http\Controllers\UsersControllerOld@getUsers')->name('user.users_list');
-//    Route::post('create', 'App\Http\Controllers\UsersControllerOld@postCreateUser')->name('user.create');
-//    Route::get('update/{id}', 'App\Http\Controllers\UsersControllerOld@getUpdateUser')->name('user.update');
-//    Route::post('update/{id}', 'App\Http\Controllers\UsersControllerOld@postUpdateUser')->name('user.update');
-//    Route::get('delete/{id}', 'App\Http\Controllers\UsersControllerOld@getDeleteUser')->name('user.delete');
-//});
 
 Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth.admin'], function() {
     Route::post('create', 'ProductsController@postCreateProduct')->name('create_product');
@@ -51,21 +38,24 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth
     Route::post('new_category', 'ProductsController@postNewCategory')->name('create_category');
     Route::post('new_subcategory', 'ProductsController@postNewSubcategory')->name('create_subcategory');
     Route::get('list_products', 'ProductsController@getProducts')->name('list_products');
+    Route::get('list_orders', 'ProductsController@getOrders')->name('list_orders');
+    Route::get('completeOrder/{id}', 'ProductsController@completeOrder')->name('completeOrder');
 });
 
 //  USER
-Route::group(['prefix' => 'cart'], function() {
+Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function() {
     Route::get('show_cart', 'ShoppingCartController@showCart')->name('show_cart');
     Route::post('/add','ShoppingCartController@addToCart');
     Route::post('/remove/{productId}/{amount}','ShoppingCartController@removeFromCart');
     Route::post('/update','ShoppingCartController@updateCart');
+    Route::get('order', 'ShoppingCartController@getOrderInfo')->name('show_order_info');
+    Route::post('order', 'ShoppingCartController@postOrder')->name('order_products');
 });
 
-Route::get('/login/profile', function () {
-    return view('user.user_profile');
-})->name('user.user_profile');
-
-
+Route::group(['prefix' => 'user'], function() {
+    Route::get('orders', 'LoggedUsersController@showOrders')->name('show_orders');
+    Route::get('profile', 'LoggedUsersController@showProfile')->name('show_profile');
+});
 
 Auth::routes();
 

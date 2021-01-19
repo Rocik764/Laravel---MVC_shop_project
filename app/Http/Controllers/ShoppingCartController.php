@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartItems;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
+use DateTime;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
@@ -11,8 +14,11 @@ class ShoppingCartController extends Controller
     public function showCart() {
         $user = auth()->user();
         $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
-        if ($cart->isEmpty()) return view('user.shopping_cart')->with('info', 'Brak produktów w koszyku.');
-
+        if ($cart->isEmpty()) {
+            $cart = null;
+            return view('user.shopping_cart', ['cart' => $cart]);
+        }
+        error_log('kekw XDDDDDDDDD');
         return view('user.shopping_cart', ['cart' => $cart]);
     }
 
@@ -65,5 +71,51 @@ class ShoppingCartController extends Controller
         $product->save();
 
         return response()->json("Produkt został usunięty z koszyka.");
+    }
+
+    public function getOrderInfo() {
+        $user = auth()->user();
+        $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
+        $subtotal = 0;
+        foreach ($cart as $item) $subtotal += $item->getSubtotal();
+
+        return view('user.order_details', ['subtotal' => $subtotal]);
+    }
+
+    public function postOrder(Request $request) {
+        $user = auth()->user();
+        $fullAddress = $request->input('address').' '.$request->input('code').' '.$request->input('city');
+        $date = new DateTime;
+        $invoice = false;
+        if($request->has('invoice')) $invoice = true;
+        $order = new Order([
+            'user_id' => $user->id,
+            'purchase_date' => $date->format('d-m-y'),
+            'is_completed' => false,
+            'address' => $fullAddress,
+            'invoice' => $invoice,
+            'phone' => $request->input('phone'),
+            'comment' => $request->input('comment'),
+            'delivery' => $request->input('delivery'),
+            'payment' => $request->input('payment'),
+            'total_price' => $request->input('totalPrice')
+        ]);
+        $order->save();
+        self::copyCartToDetails($user, $date);
+        return redirect()->action('ShoppingCartController@showCart');
+    }
+
+    private function copyCartToDetails($user, $date) {
+        $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
+        foreach ($cart as $item) {
+            $orderDetails = new OrderDetails([
+                'product_id' => $item->product_id,
+                'user_id' => $item->user_id,
+                'amount' => $item->amount,
+                'purchase' => $date->format('d-m-y')
+            ]);
+            $orderDetails->save();
+        }
+        $cart = CartItems::query()->with('product')->where('user_id', $user->id)->delete();
     }
 }
