@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\CartItems;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Producent;
 use App\Models\Subcategory;
 use Exception;
@@ -11,11 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Product;
 use Image;
+use function PHPUnit\Framework\isEmpty;
 
 class ProductsController extends Controller
 {
     public function getProducts() {
         $products = Product::with('category')->with('subcategory')->with('producent')->get();
+
         return view('admin.products.show_products', ['products' => $products]);
     }
 
@@ -23,6 +26,7 @@ class ProductsController extends Controller
         $category = Category::all();
         $subcategory = Subcategory::all();
         $producent = Producent::all();
+
         return view('admin.products.new_product', ['categories'=>$category, 'subcategories'=>$subcategory, 'producents'=>$producent]);
     }
 
@@ -31,6 +35,7 @@ class ProductsController extends Controller
         $category = Category::all();
         $subcategory = Subcategory::all();
         $producent = Producent::all();
+
         return view('admin.products.edit_product', ['formType' => 'update', 'product' => $product, 'productId' => $id,
             'categories'=>$category,
             'subcategories'=>$subcategory,
@@ -44,6 +49,7 @@ class ProductsController extends Controller
         } catch (Exception $e) {
             return back()->withErrors('delete.fail', 'Niepowodzenie usuwania produktu');
         }
+
         return redirect()->route('list_products');
     }
 
@@ -104,6 +110,7 @@ class ProductsController extends Controller
         ]);
 
         $category->save();
+
         return redirect()->route('new_category_subcategory')->with('info', 'Dodano kategorię');
     }
 
@@ -113,11 +120,13 @@ class ProductsController extends Controller
         ]);
 
         $subcategory->save();
+
         return redirect()->route('new_category_subcategory')->with('info', 'Dodano podkategorię');
     }
 
     public function getOrders() {
         $orders = Order::with('user')->get();
+
         return view('admin.orders.orders_list', ['orders' => $orders]);
     }
 
@@ -126,5 +135,13 @@ class ProductsController extends Controller
         $value = !$order->is_completed;
         $order->is_completed = $value;
         $order->save();
+    }
+
+    public function getDetails($uId, $date) {
+        $orderDetails = OrderDetails::where('user_id', $uId)
+            ->where('purchase', $date)
+            ->get();
+
+        return view('fragments.getdetails', compact('orderDetails'));
     }
 }

@@ -82,7 +82,7 @@
                                     <input type="text" class="form-control mt-1" name="address" placeholder="Ulica i numer" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-3" name="code" placeholder="Kod pocztowy" required>
+                                    <input type="text" class="form-control mt-3" name="code" placeholder="Kod pocztowy" value="__-___" data-mask="__-___" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control mt-3" name="city" placeholder="Miejscowość" required>
@@ -119,7 +119,8 @@
                                 <span>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input id="regulations" type="checkbox" class="form-check-input" required>Akceptuje regulamin
+                                            <input id="regulations" type="checkbox" class="form-check-input" required>
+                                            Akceptuje <a href="#regulationsModal" class="regulations" data-toggle="modal" data-target="#regulationsModal">regulamin</a>
                                         </label>
                                     </div>
                                 </span>
@@ -136,6 +137,7 @@
     </div>
 </div>
 @include('fragments.standard_modal')
+@include('fragments.regulations_modal')
 <script type="text/javascript">
     $(function () {
         $('input[name="comment"]').hide();

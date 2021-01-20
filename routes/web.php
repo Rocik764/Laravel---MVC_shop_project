@@ -40,6 +40,7 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth
     Route::get('list_products', 'ProductsController@getProducts')->name('list_products');
     Route::get('list_orders', 'ProductsController@getOrders')->name('list_orders');
     Route::get('completeOrder/{id}', 'ProductsController@completeOrder')->name('completeOrder');
+    Route::post('show_details/{uId}/{date}', 'ProductsController@getDetails')->name('getDetails');
 });
 
 //  USER
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'user'], function() {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\AppController::class, 'getHome'])->name('index');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource("/users", 'UsersController', ["except"=>["show","create","store"]]);

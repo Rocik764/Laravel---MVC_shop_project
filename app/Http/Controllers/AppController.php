@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
+    public function getHome() {
+        return redirect()->action('AppController@getIndex');
+    }
+
     public function getProducents() {
         $producent = Producent::query()->get();
+
         return view('shop.partners', ['producents' => $producent]);
     }
 
@@ -39,11 +44,13 @@ class AppController extends Controller
 
     public function getProducts() {
         $products = Product::with('category')->with('subcategory')->with('producent')->paginate(8);
+
         return view('shop.show_product', ['products' => $products]);
     }
 
     public function getShowProductInfo($id) {
         $product = Product::query()->find($id);
+
         return view('shop.product_info', ['product' => $product]);
     }
 
@@ -73,6 +80,7 @@ class AppController extends Controller
         $category = Category::all();
         $subcategory = Subcategory::all();
         $producent = Producent::all();
+
         return view('shop.filtering', ['categories'=>$category, 'subcategories'=>$subcategory, 'producents'=>$producent]);
     }
 

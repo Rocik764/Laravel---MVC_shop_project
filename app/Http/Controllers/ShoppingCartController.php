@@ -19,6 +19,7 @@ class ShoppingCartController extends Controller
             return view('user.shopping_cart', ['cart' => $cart]);
         }
         error_log('kekw XDDDDDDDDD');
+
         return view('user.shopping_cart', ['cart' => $cart]);
     }
 
@@ -85,12 +86,12 @@ class ShoppingCartController extends Controller
     public function postOrder(Request $request) {
         $user = auth()->user();
         $fullAddress = $request->input('address').' '.$request->input('code').' '.$request->input('city');
-        $date = new DateTime;
+        $date = date('Y-m-d H:i:s');
         $invoice = false;
         if($request->has('invoice')) $invoice = true;
         $order = new Order([
             'user_id' => $user->id,
-            'purchase_date' => $date->format('d-m-y'),
+            'purchase_date' => $date,
             'is_completed' => false,
             'address' => $fullAddress,
             'invoice' => $invoice,
@@ -102,6 +103,7 @@ class ShoppingCartController extends Controller
         ]);
         $order->save();
         self::copyCartToDetails($user, $date);
+
         return redirect()->action('ShoppingCartController@showCart');
     }
 
@@ -112,7 +114,7 @@ class ShoppingCartController extends Controller
                 'product_id' => $item->product_id,
                 'user_id' => $item->user_id,
                 'amount' => $item->amount,
-                'purchase' => $date->format('d-m-y')
+                'purchase' => $date
             ]);
             $orderDetails->save();
         }

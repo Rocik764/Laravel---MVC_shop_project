@@ -30,7 +30,7 @@
                 <div class="row m-1">
                     <div class="col-lg-8">
                         @php if($cart == null) { @endphp
-                            <p class="alert alert-info">Brak produktów w koszyku.</p
+                            <p class="alert alert-info">Brak produktów w koszyku.</p>
                         @php } else { @endphp
                             @foreach($cart as $item)
     {{--                            <div class="row border rounded" th:with="product = ${item.product}" th:id="'row' + ${status.count}">--}}
