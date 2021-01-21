@@ -8,6 +8,7 @@ use App\Models\OrderDetails;
 use App\Models\Producent;
 use App\Models\Subcategory;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Product;
@@ -100,8 +101,29 @@ class ProductsController extends Controller
         return redirect()->route('shop.show_products')->with('info', 'Zaktualizowano produkt');
     }
 
+    public function postNewProducent(Request $request) {
+        $producent = new Producent([
+           'name' => $request->input('name'),
+           'characteristics' => $request->input('characteristics'),
+           'phone' => $request->input('phone'),
+        ]);
+        $producent->save();
+
+        return redirect()->route('new_category_subcategory')->with('info', 'Dodano producenta');
+    }
+
     public function getNewCatSub() {
+
         return view('admin.products.new_category_subcategory');
+    }
+
+    public function getEditCatSub() {
+
+        return view('admin.products.edit_category_subcategory', [
+            "categories" => Category::all(),
+            "subcategories" => Subcategory::all(),
+            "producents" => Producent::all()
+        ]);
     }
 
     public function postNewCategory(Request $request) {
@@ -143,5 +165,47 @@ class ProductsController extends Controller
             ->get();
 
         return view('fragments.getdetails', compact('orderDetails'));
+    }
+
+    /**
+     * Deleting categories / subcategories / producents
+     */
+    public function postDeleteCategory($id) {
+        $category = Category::query()->find($id);
+        try {
+            $category->delete();
+        } catch (QueryException  $e) {
+            return back()->withErrors(['Usunięcie tej kategorii spowoduje naruszenie ograniczenia w tabeli produktów ponieważ istnieją produkty z tą kategorią.']);
+        } catch (Exception $e) {
+            return back()->withErrors(['Niepowodzenie usuwania kategorii.']);
+        }
+
+        return redirect()->route('edit_category_subcategory');
+    }
+
+    public function postDeleteSubcategory($id) {
+        $subcategory = Subcategory::query()->find($id);
+        try {
+            $subcategory->delete();
+        } catch (QueryException  $e) {
+            return back()->withErrors(['Usunięcie tej podkategorii spowoduje naruszenie ograniczenia w tabeli produktów ponieważ istnieją produkty z tą podkategorią.']);
+        } catch (Exception $e) {
+            return back()->withErrors(['Niepowodzenie usuwania podkategorii.']);
+        }
+
+        return redirect()->route('edit_category_subcategory');
+    }
+
+    public function postDeleteProducent($id) {
+        $producent = Producent::query()->find($id);
+        try {
+            $producent->delete();
+        } catch (QueryException  $e) {
+            return back()->withErrors(['Usunięcie tego producenta spowoduje naruszenie ograniczenia w tabeli produktów ponieważ istnieją produkty z tym producentem.']);
+        } catch (Exception $e) {
+            return back()->withErrors(['Niepowodzenie usuwania producenta.']);
+        }
+
+        return redirect()->route('edit_category_subcategory');
     }
 }

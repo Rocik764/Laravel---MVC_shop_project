@@ -26,7 +26,13 @@
         <div id="content-main">
             <div class="container">
                 <div class="row">
-{{--                    th:each="product, iteration : ${productList}" th:if="${iteration.index < 4}"--}}
+                    @if(\Illuminate\Support\Facades\Session::has('info'))
+                        <div class="row">
+                            <div class="col-md-12 mt-5">
+                                <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
+                            </div>
+                        </div>
+                    @endif
                     @foreach($products as $product)
                     @if($loop->index < 4)
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
@@ -82,26 +88,9 @@
                     @endif
                     @endforeach
                 </div>
-                <div>{{ $products->count() }}</div>
-                <div><p></p></div>
-{{--                <div th:if = "${totalPages > 1}">--}}
-{{--                    <div class = "row">--}}
-{{--                        <div class = "col-12 col-md-4">--}}
-{{--                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">--}}
-{{--                            <a th:if="${currentPage != i}" th:href="@{'/product/page/' + ${i}}">[[${i}]]</a>--}}
-{{--                            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;--}}
-{{--                        </span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-12 col-md-4">--}}
-{{--                            <a th:if="${currentPage < totalPages}" th:href="@{'/product/page/' + ${currentPage + 1}}">Next</a>--}}
-{{--                            <span th:unless="${currentPage < totalPages}">Next</span>--}}
-{{--                            <a th:if="${currentPage != 0}" th:href="@{'/product/page/' + ${currentPage - 1}}">Previous</a>--}}
-{{--                            <span th:unless="${currentPage != 0}">Previous</span>--}}
-{{--                            <a th:if="${currentPage < totalPages}" th:href="@{'/product/page/' + ${totalPages}}">Last</a>--}}
-{{--                            <span th:unless="${currentPage < totalPages}">Last</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="row">
+                    <div>{{ $products->links() }}</div>
+                </div>
             </div>
         </div>
     </div>

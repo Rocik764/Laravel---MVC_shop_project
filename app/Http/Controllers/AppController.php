@@ -5,7 +5,10 @@ use App\Models\Category;
 use App\Models\Producent;
 use App\Models\Product;
 use App\Models\Subcategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Mosquitto\Exception;
+use function PHPUnit\Framework\isEmpty;
 
 class AppController extends Controller
 {
@@ -37,7 +40,8 @@ class AppController extends Controller
             ->with('producent')
             ->where('category_id', $category)
             ->where('subcategory_id', $subcategory)
-            ->get();
+            ->paginate(8);
+        if(isEmpty($products)) return redirect()->route('show_product')->with('info', 'Nie ma takich kategorii.');
 
         return view('shop.show_product', ['products' => $products]);
     }
@@ -49,7 +53,13 @@ class AppController extends Controller
     }
 
     public function getShowProductInfo($id) {
-        $product = Product::query()->find($id);
+        try {
+            $product = Product::query()->findOrFail($id);
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('show_product')->with('info', 'Nie ma takiego produktu.');
+        } catch (\Exception $exception) {
+            return redirect()->route('show_product')->with('info', 'Coś poszło nie tak.');
+        }
 
         return view('shop.product_info', ['product' => $product]);
     }

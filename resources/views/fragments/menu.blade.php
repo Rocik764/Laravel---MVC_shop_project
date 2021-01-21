@@ -21,9 +21,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{route('show_index')}}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Schronisko</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
                         Popularne kategorie

@@ -24,40 +24,44 @@
     <div id="content">
         @include('fragments.side_menu_collapse')
         <div id="content-main">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Password</th>
-                        <th>E-mail</th>
-                        <th>Roles</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nazwa</th>
+                            <th>Hasło</th>
+                            <th>Mail</th>
+                            <th>Role</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    <tr @foreach($users as $user)>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->password }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
-                        <td>
-                            <a class="float-left" href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
-                            &nbsp;&nbsp;&nbsp;
-                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="test2">Delete</button>
-                            </form>
-{{--                            <a href="{{ route('admin.users.destroy', $user->id) }}">Delete</a>--}}
-                        </td>
-                    </tr @endforeach>
-                    </tbody>
-                </table>
-                {{ $users->links() }}
+                        <tr @foreach($users as $user)>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->password }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                            <td>
+                                <a class="float-left btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}" >Edytuj</a>
+                                &nbsp;&nbsp;&nbsp;
+                                <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="test2">Usuń</button>
+                                </form>
+                                {{--                            <a href="{{ route('admin.users.destroy', $user->id) }}">Delete</a>--}}
+                            </td>
+                        </tr @endforeach>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div>{{ $users->links() }}</div>
+                </div>
             </div>
         </div>
     </div>

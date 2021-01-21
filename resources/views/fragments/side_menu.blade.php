@@ -14,10 +14,10 @@
                 <a href="{{route('new_product')}}">Dodaj produkty</a>
             </li>
             <li>
-                <a href="{{route('new_category_subcategory')}}">Dodaj kategorie</a>
+                <a href="{{route('edit_category_subcategory')}}">Usuń kategorie</a>
             </li>
             <li>
-{{--                <a href="{{route('admin.new_user')}}">Dodaj użytowników</a>--}}
+                <a href="{{route('new_category_subcategory')}}">Dodaj kategorie</a>
             </li>
             <li>
                 <a href="{{route('admin.users.index')}}">Edytuj użytowników</a>
