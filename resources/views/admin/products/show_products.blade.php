@@ -50,15 +50,7 @@
 
                     <tr @foreach($products as $product)>
                         <td>
-                            @php
-                                ob_start();
-                                fpassthru($product->image);
-                                $contents = ob_get_contents();
-                                ob_end_clean();
-
-                                $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
-                                echo "<img src='$dataUri' style=\"width: 50px; height: 50px;\"/>";
-                            @endphp
+                            <img src="{{ asset('uploads/images/'.$product->image) }}" alt="obrazek" style="width: 50px; height: 50px;">
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->description }}</td>

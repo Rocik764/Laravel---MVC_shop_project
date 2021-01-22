@@ -22,8 +22,8 @@ Route::group(['prefix' => 'shop'], function() {
     Route::get('product', 'AppController@getProducts')->name('show_product');
     Route::get('products/{category}/{subcategory}','AppController@getProductByCategory')->name('show_products');
     Route::get('product/{id}','AppController@getShowProductInfo')->name('show_product_info');
-    Route::post('side_menu_filtering','AppController@postSideMenuFiltering')->name('side_menu_filtering');
-    Route::post('filteringPost','AppController@postFiltering')->name('post_filtering');
+    Route::match(array('GET', 'POST'),'side_menu_filtering','AppController@postSideMenuFiltering')->name('side_menu_filtering');
+    Route::match(array('GET', 'POST'),'filteringPost','AppController@postFiltering')->name('post_filtering');
     Route::get('filtering','AppController@getFiltering')->name('get_filtering');
 });
 

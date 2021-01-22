@@ -36,15 +36,7 @@
                     </div>
                     <div class="line"></div>
                     <div class="row">
-                        @php
-                            ob_start();
-                            fpassthru($product->image);
-                            $contents = ob_get_contents();
-                            ob_end_clean();
-
-                            $dataUri = "data:image/jpeg;base64," . base64_encode($contents);
-                            echo "<img src='$dataUri' style=\"width: 250px; height: 250px;\"/>";
-                        @endphp
+                        <img src="{{ asset('uploads/images/'.$product->image) }}" alt="obrazek" style="width: 250px; height: 250px;">
                         <div class="col-md-7">
                             <p class="small text-white mb-0">
                                 Opis: {{ $product->description }}<br/>

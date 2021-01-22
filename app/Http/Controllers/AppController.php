@@ -81,7 +81,7 @@ class AppController extends Controller
         $products = Product::with('category')->with('subcategory')->with('producent')
             ->where('name', 'like', "%{$keyword}%")
             ->whereBetween('price', [$from, $to])
-            ->get();
+            ->paginate(8);
 
         return view('shop.show_product', ['products' => $products]);
     }
@@ -126,7 +126,7 @@ class AppController extends Controller
             ->whereIn('category_id', $cId)
             ->whereIn('subcategory_id', $sId)
             ->whereIn('producent_id', $pId)
-            ->get();
+            ->paginate(8);
 
         return view('shop.show_product', ['products' => $products]);
     }

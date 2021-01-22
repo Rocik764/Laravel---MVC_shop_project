@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\CartItems;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -10,10 +9,7 @@ use App\Models\Subcategory;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Models\Product;
-use Image;
-use function PHPUnit\Framework\isEmpty;
 
 class ProductsController extends Controller
 {
@@ -45,6 +41,8 @@ class ProductsController extends Controller
 
     public function getDeleteProduct($id) {
         $product = Product::query()->find($id);
+        $path = public_path()."/uploads/images/".$product->image;
+        unlink($path);
         try {
             $product->delete();
         } catch (Exception $e) {
@@ -56,13 +54,6 @@ class ProductsController extends Controller
 
     public function postCreateProduct(Request $request) {
 
-        $file = pathinfo($request->input('image'), PATHINFO_EXTENSION);
-        $allowTypes = array('jpg', 'jpeg', 'png');
-        if(in_array($file, $allowTypes)) {
-            $image = $_FILES['image']['tmp_name'];
-            $imgContent = addslashes(file_get_contents($image));
-        } else $imgContent = "test";
-
         $product = new Product([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -71,12 +62,21 @@ class ProductsController extends Controller
             'category_id' => $request->input('category_id'),
             'producent_id' => $request->input('producent_id'),
             'subcategory_id' => $request->input('subcategory_id'),
-            'image' => $imgContent,
         ]);
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads/images/', $filename);
+            $product->image = $filename;
+        } else {
+            $product->image = '';
+        }
 
         $product->save();
 
-        return redirect()->route('admin.show_products');
+        return redirect()->route('list_products');
     }
 
     public function postUpdateProduct(Request $request) {
@@ -98,7 +98,7 @@ class ProductsController extends Controller
         ]);
         $product->save();
 
-        return redirect()->route('shop.show_products')->with('info', 'Zaktualizowano produkt');
+        return redirect()->route('list_products')->with('info', 'Zaktualizowano produkt');
     }
 
     public function postNewProducent(Request $request) {

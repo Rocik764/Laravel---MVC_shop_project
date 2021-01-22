@@ -82,9 +82,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleFormControlFile1" class="col-sm col-form-label text-center font-weight-bold">Obrazek</label>
+                        <label for="image" class="col-sm col-form-label text-center font-weight-bold">Obrazek</label>
                         <div class="col-sm-10">
-                            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg" required>
+                            <input type="file" name="image" class="form-control-file" id="image" accept="image/png, image/jpeg" required>
                         </div>
                     </div>
                     <div class="form-group row">
