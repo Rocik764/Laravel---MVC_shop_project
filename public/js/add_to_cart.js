@@ -10,7 +10,7 @@ function addToCart() {
     const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
     let amount = $("#amount" + productId).val()
     let id = productId
-    let url = '/cart/add'
+    let url = url_route
 
     console.log(amount);
     console.log(url);

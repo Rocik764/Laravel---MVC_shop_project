@@ -54,6 +54,17 @@ class ProductsController extends Controller
 
     public function postCreateProduct(Request $request) {
 
+        $request->validate([
+            'name' => 'required|min:3|max:100',
+            'description' => 'required|min:10|max:10000',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+            'category_id' => 'required',
+            'producent_id' => 'required',
+            'subcategory_id' => 'required',
+            'image' => 'required|image'
+        ]);
+
         $product = new Product([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -80,12 +91,18 @@ class ProductsController extends Controller
     }
 
     public function postUpdateProduct(Request $request) {
+
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required',
-            'price' => 'required'
+            'name' => 'required|min:3|max:100',
+            'description' => 'required|min:10|max:10000',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+            'category_id' => 'required',
+            'producent_id' => 'required',
+            'subcategory_id' => 'required',
+            'image' => 'required|image'
         ]);
+
         $product = Product::query()->find($request->input('id'));
         $product->fill([
             'name' => $request->input('name'),

@@ -26,7 +26,16 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <form action="{{ route('order_products') }}"  method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('order_products') }}" method="POST">
                     <div class="row">
                         <div class="col-lg-8">
                             <h2>Dostawa i płatność</h2>
@@ -34,17 +43,17 @@
                                 <h4>Sposób dostawy</h4>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="delivery" value="kurier" required>Kurier - InPost, UPS, FedEx, DTS lub Poczta Polska
+                                    <input type="radio" class="form-check-input" name="delivery" value="kurier">Kurier - InPost, UPS, FedEx, DTS lub Poczta Polska
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="delivery" value="osobiście" required>Odbiór osobisty
+                                        <input type="radio" class="form-check-input" name="delivery" value="osobiście">Odbiór osobisty
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="delivery" value="paczkomat" required>Paczkomaty 24/7
+                                        <input type="radio" class="form-check-input" name="delivery" value="paczkomat">Paczkomaty 24/7
                                     </label>
                                 </div>
                             </div>
@@ -52,43 +61,43 @@
                                 <h4>Metoda płatności</h4>
                                     <div class="form-check">
                                     <label class="form-check-label active">
-                                    <input type="radio" class="form-check-input" name="payment" value="blik" required>BLIK
+                                    <input type="radio" class="form-check-input" name="payment" value="blik">BLIK
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="payment" value="przelew" required>Przelew gotówkowy
+                                        <input type="radio" class="form-check-input" name="payment" value="przelew">Przelew gotówkowy
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="payment" value="przy odbiorze" required>Przy odbiorze
+                                        <input type="radio" class="form-check-input" name="payment" value="przy odbiorze">Przy odbiorze
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="payment" value="karta płatnicza" required>Karta płatnicza online
+                                        <input type="radio" class="form-check-input" name="payment" value="karta płatnicza">Karta płatnicza online
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="payment" value="dotpay" required>Szybki przelew DotPay
+                                        <input type="radio" class="form-check-input" name="payment" value="dotpay">Szybki przelew DotPay
                                     </label>
                                 </div>
                             </div>
                             <div>
                                 <h4>Dane odbiorcy</h4>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-1" name="address" placeholder="Ulica i numer" required>
+                                    <input type="text" class="form-control mt-1" name="address" placeholder="Ulica i numer">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-3" name="code" placeholder="Kod pocztowy" value="__-___" data-mask="__-___" required>
+                                    <input type="text" class="form-control mt-3" name="code" placeholder="Kod pocztowy" value="__-___" data-mask="__-___">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-3" name="city" placeholder="Miejscowość" required>
+                                    <input type="text" class="form-control mt-3" name="city" placeholder="Miejscowość">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-3" name="phone" placeholder="Telefon" value="+__ ___ ___ ___" data-mask="+__ ___ ___ ___" required>
+                                    <input type="text" class="form-control mt-3" name="phone" placeholder="Telefon" value="+__ ___ ___ ___" data-mask="+__ ___ ___ ___">
                                 </div>
                             </div>
                             <div>
@@ -113,13 +122,12 @@
                             </div>
                             <div class="mt-2">
                                 <span class="h2" id="totalPrice">{{ $subtotal }}</span>
-                                <input type="hidden" name="totalPrice" value="{{ $subtotal }}">
                             </div>
                             <div>
                                 <span>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input id="regulations" type="checkbox" class="form-check-input" required>
+                                            <input id="regulations" name="regulations" type="checkbox" class="form-check-input">
                                             Akceptuje <a href="#regulationsModal" class="regulations" data-toggle="modal" data-target="#regulationsModal">regulamin</a>
                                         </label>
                                     </div>

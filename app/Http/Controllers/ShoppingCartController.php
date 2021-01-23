@@ -8,6 +8,7 @@ use App\Models\OrderDetails;
 use App\Models\Product;
 use DateTime;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class ShoppingCartController extends Controller
 {
@@ -77,18 +78,33 @@ class ShoppingCartController extends Controller
     public function getOrderInfo() {
         $user = auth()->user();
         $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
-        $subtotal = 0;
-        foreach ($cart as $item) $subtotal += $item->getSubtotal();
+        if(isEmpty($cart)) return redirect()->action('ShoppingCartController@showCart');
+        else {
+            $subtotal = 0;
+            foreach ($cart as $item) $subtotal += $item->getSubtotal();
+        }
 
         return view('user.order_details', ['subtotal' => $subtotal]);
     }
 
     public function postOrder(Request $request) {
+        $request->validate([
+            'address' => 'required',
+            'code' => ['required', 'regex:/([0-9][0-9]\-[0-9][0-9][0-9])/'],
+            'city' => ['required', 'regex:/^[A-Z-ŻŹĆĄŚĘŁÓŃ][a-zA-Z-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/', 'min:3', 'max:255'],
+            'phone' => ['required', 'regex:/\+\d{2}\s\d{3}\s\d{3}\s\d{3}/'],
+            'delivery' => 'required',
+            'payment' => 'required',
+            'regulations' => 'required'
+        ]);
+
         $user = auth()->user();
         $fullAddress = $request->input('address').' '.$request->input('code').' '.$request->input('city');
         $date = date('Y-m-d H:i:s');
         $invoice = false;
         if($request->has('invoice')) $invoice = true;
+        $totalPrice = self::getTotalPrice($user);
+
         $order = new Order([
             'user_id' => $user->id,
             'purchase_date' => $date,
@@ -99,16 +115,24 @@ class ShoppingCartController extends Controller
             'comment' => $request->input('comment'),
             'delivery' => $request->input('delivery'),
             'payment' => $request->input('payment'),
-            'total_price' => $request->input('totalPrice')
+            'total_price' => $totalPrice
         ]);
-        $order->save();
+
+        try {
+            $order->save();
+        } catch (\Exception $e) {
+            return redirect()->route('show_cart')->with('info', $e->getMessage());
+        }
+
         self::copyCartToDetails($user, $date);
 
         return redirect()->action('ShoppingCartController@showCart');
     }
 
     private function copyCartToDetails($user, $date) {
+
         $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
+
         foreach ($cart as $item) {
             $orderDetails = new OrderDetails([
                 'product_id' => $item->product_id,
@@ -118,6 +142,18 @@ class ShoppingCartController extends Controller
             ]);
             $orderDetails->save();
         }
+
         $cart = CartItems::query()->with('product')->where('user_id', $user->id)->delete();
+    }
+
+    private function getTotalPrice($user) {
+        $totalPrice = 0;
+        $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
+
+        foreach ($cart as $item) {
+            $totalPrice += $item->getSubtotal();
+        }
+
+        return $totalPrice;
     }
 }

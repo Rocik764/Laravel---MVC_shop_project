@@ -26,6 +26,15 @@
         <div id="content-main">
             <div class="container">
                 <h1>Dodaj nowy produkt</h1>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{route('create_product')}}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label for="inputFirstName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>

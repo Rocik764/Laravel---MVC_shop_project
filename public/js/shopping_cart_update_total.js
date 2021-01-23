@@ -63,7 +63,7 @@ function updateSubtotal(newSubtotal, productId) {
 function updateAmount(productId, amount, link) {
     console.log("updateAmount")
     const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
-    let url = '/cart/update'
+    let url = url_plus_minus
 
     $.ajax({
         type: "POST",

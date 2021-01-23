@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'shop'], function() {
     Route::get('index', 'AppController@getIndex')->name('show_index');
     Route::get('contact', 'AppController@showContact')->name('show_contacts');
-    Route::get('partners', 'AppController@getPartners')->name('show_partners');
+    Route::get('partners', 'AppController@getProducents')->name('show_partners');
     Route::get('product', 'AppController@getProducts')->name('show_product');
     Route::get('products/{category}/{subcategory}','AppController@getProductByCategory')->name('show_products');
     Route::get('product/{id}','AppController@getShowProductInfo')->name('show_product_info');
@@ -50,9 +50,9 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth
 //  USER
 Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function() {
     Route::get('show_cart', 'ShoppingCartController@showCart')->name('show_cart');
-    Route::post('/add','ShoppingCartController@addToCart');
-    Route::post('/remove/{productId}/{amount}','ShoppingCartController@removeFromCart');
-    Route::post('/update','ShoppingCartController@updateCart');
+    Route::post('/add','ShoppingCartController@addToCart')->name('cart_add');
+    Route::post('/remove/{productId}/{amount}','ShoppingCartController@removeFromCart')->name('cart_remove');
+    Route::post('/update','ShoppingCartController@updateCart')->name('cart_update');
     Route::get('order', 'ShoppingCartController@getOrderInfo')->name('show_order_info');
     Route::post('order', 'ShoppingCartController@postOrder')->name('order_products');
 });

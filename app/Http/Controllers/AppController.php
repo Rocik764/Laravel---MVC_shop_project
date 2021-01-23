@@ -26,10 +26,6 @@ class AppController extends Controller
         return view('shop.contact');
     }
 
-    public function getPartners() {
-        return view('shop.partners');
-    }
-
     public function getIndex() {
         return view('shop.index');
     }

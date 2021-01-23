@@ -26,6 +26,15 @@
         <div id="content-main">
             <div class="container">
                 <h1>Edytuj produkt z ID:</h1>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if(!isset($formType))
                 @elseif($formType === 'update')
                     <form action="{{ route('update_product_post', ['id' => $productId]) }}" method="post">
