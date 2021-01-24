@@ -88,7 +88,6 @@
 <script type="text/javascript" src="{{ asset('/js/shopping_cart_update_total.js') }}"></script>
 <script>
     const url_plus_minus = "{{ route('cart_update') }}"
-    const url_add
 </script>
 </body>
 </html>

@@ -59,9 +59,9 @@ class ProductsController extends Controller
             'description' => 'required|min:10|max:10000',
             'quantity' => 'required|numeric',
             'price' => 'required|numeric',
-            'category_id' => 'required',
-            'producent_id' => 'required',
-            'subcategory_id' => 'required',
+            'category_id' => 'required|exists:category,id',
+            'producent_id' => 'required|exists:producent,id',
+            'subcategory_id' => 'required|exists:subcategory,id',
             'image' => 'required|image'
         ]);
 
@@ -97,9 +97,9 @@ class ProductsController extends Controller
             'description' => 'required|min:10|max:10000',
             'quantity' => 'required|numeric',
             'price' => 'required|numeric',
-            'category_id' => 'required',
-            'producent_id' => 'required',
-            'subcategory_id' => 'required',
+            'category_id' => 'required|exists:category,id',
+            'producent_id' => 'required|exists:producent,id',
+            'subcategory_id' => 'required|exists:subcategory,id',
             'image' => 'required|image'
         ]);
 
@@ -118,17 +118,6 @@ class ProductsController extends Controller
         return redirect()->route('list_products')->with('info', 'Zaktualizowano produkt');
     }
 
-    public function postNewProducent(Request $request) {
-        $producent = new Producent([
-           'name' => $request->input('name'),
-           'characteristics' => $request->input('characteristics'),
-           'phone' => $request->input('phone'),
-        ]);
-        $producent->save();
-
-        return redirect()->route('new_category_subcategory')->with('info', 'Dodano producenta');
-    }
-
     public function getNewCatSub() {
 
         return view('admin.products.new_category_subcategory');
@@ -144,6 +133,11 @@ class ProductsController extends Controller
     }
 
     public function postNewCategory(Request $request) {
+
+        $request -> validate([
+            'name' => 'required|min:3|max:15',
+        ]);
+
         $category = new Category([
             'name' => $request->input('name'),
         ]);
@@ -154,6 +148,11 @@ class ProductsController extends Controller
     }
 
     public function postNewSubcategory(Request $request) {
+
+        $request -> validate([
+            'name' => 'required|min:3|max:15',
+        ]);
+
         $subcategory = new Subcategory([
             'name' => $request->input('name'),
         ]);
@@ -161,6 +160,24 @@ class ProductsController extends Controller
         $subcategory->save();
 
         return redirect()->route('new_category_subcategory')->with('info', 'Dodano podkategorię');
+    }
+
+    public function postNewProducent(Request $request) {
+
+        $request -> validate([
+            'name' => 'required|min:3|max:100',
+            'characteristics' => 'required|min:20|max:10000',
+            'phone' => ['required', 'regex:/\+\d{2}\s\d{3}\s\d{3}\s\d{3}/']
+        ]);
+
+        $producent = new Producent([
+            'name' => $request->input('name'),
+            'characteristics' => $request->input('characteristics'),
+            'phone' => $request->input('phone'),
+        ]);
+        $producent->save();
+
+        return redirect()->route('new_category_subcategory')->with('info', 'Dodano producenta');
     }
 
     public function getOrders() {
@@ -174,6 +191,8 @@ class ProductsController extends Controller
         $value = !$order->is_completed;
         $order->is_completed = $value;
         $order->save();
+
+        return redirect()->route('list_orders');
     }
 
     public function getDetails($uId, $date) {

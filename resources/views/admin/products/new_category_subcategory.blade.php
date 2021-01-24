@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="inputCategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control text-center" id="inputCategory" name="name" required>
+                                    <input type="text" class="form-control text-center" id="inputCategory" name="name">
                                 </div>
                             </div>
                             <div class="form-group row mt-2">
@@ -49,7 +49,7 @@
                             <div class="form-group row">
                                 <label for="inputSubcategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control text-center" id="inputSubcategory" name="name" required>
+                                    <input type="text" class="form-control text-center" id="inputSubcategory" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -68,19 +68,19 @@
                             <div class="form-group row">
                                 <label for="inputProducentName" class="col-2 col-form-label text-center font-weight-bold">Nazwa</label>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" id="inputProducentName" name="name" required>
+                                    <input type="text" class="form-control" id="inputProducentName" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputProducentCharacteristics" class="col-2 col-form-label text-center font-weight-bold">Charakterystyka</label>
                                 <div class="col-10">
-                                    <textarea type="text" class="form-control" id="inputProducentCharacteristics" name="characteristics" required rows="3"></textarea>
+                                    <textarea type="text" class="form-control" id="inputProducentCharacteristics" name="characteristics" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row mt-1">
                                 <label for="inputProducentPhone" class="col-2 col-form-label text-center font-weight-bold">Telefon</label>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" id="inputProducentPhone" name="phone" value="+__ ___ ___ ___" data-mask="+__ ___ ___ ___" required>
+                                    <input type="text" class="form-control" id="inputProducentPhone" name="phone" value="+__ ___ ___ ___" data-mask="+__ ___ ___ ___">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -97,6 +97,15 @@
                         <div class="col-md-12 mt-5">
                             <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
                         </div>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger mt-5">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
             </div>

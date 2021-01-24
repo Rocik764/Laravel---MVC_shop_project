@@ -19,9 +19,11 @@
             <li>
                 <a href="{{route('new_category_subcategory')}}">Dodaj kategorie</a>
             </li>
+            @can("manage-users")
             <li>
                 <a href="{{route('admin.users.index')}}">Edytuj użytowników</a>
             </li>
+            @endcan
         </ul>
     </li @endcan>
     <li>

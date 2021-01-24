@@ -8,6 +8,7 @@ use App\Models\OrderDetails;
 use App\Models\Product;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use function PHPUnit\Framework\isEmpty;
 
 class ShoppingCartController extends Controller
@@ -19,7 +20,6 @@ class ShoppingCartController extends Controller
             $cart = null;
             return view('user.shopping_cart', ['cart' => $cart]);
         }
-        error_log('kekw XDDDDDDDDD');
 
         return view('user.shopping_cart', ['cart' => $cart]);
     }
@@ -59,7 +59,7 @@ class ShoppingCartController extends Controller
         $oldQuantity->amount = $request->amount;
         $product->save();
         $oldQuantity->save();
-        $response = $oldQuantity->amount;
+        $response = $oldQuantity->getSubtotal();
 
         return response()->json($response);
     }
@@ -78,8 +78,9 @@ class ShoppingCartController extends Controller
     public function getOrderInfo() {
         $user = auth()->user();
         $cart = CartItems::query()->with('product')->where('user_id', $user->id)->get();
-        if(isEmpty($cart)) return redirect()->action('ShoppingCartController@showCart');
-        else {
+        if ($cart->isEmpty()) {
+            return redirect()->action('ShoppingCartController@showCart');
+        } else {
             $subtotal = 0;
             foreach ($cart as $item) $subtotal += $item->getSubtotal();
         }
@@ -93,8 +94,8 @@ class ShoppingCartController extends Controller
             'code' => ['required', 'regex:/([0-9][0-9]\-[0-9][0-9][0-9])/'],
             'city' => ['required', 'regex:/^[A-Z-ŻŹĆĄŚĘŁÓŃ][a-zA-Z-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/', 'min:3', 'max:255'],
             'phone' => ['required', 'regex:/\+\d{2}\s\d{3}\s\d{3}\s\d{3}/'],
-            'delivery' => 'required',
-            'payment' => 'required',
+            'delivery' => ['required', Rule::in(['kurier', 'osobiście', 'paczkomat'])],
+            'payment' => ['required', Rule::in(['blik', 'przelew', 'przy odbiorze', 'karta płatnicza', 'dotpay'])],
             'regulations' => 'required'
         ]);
 
