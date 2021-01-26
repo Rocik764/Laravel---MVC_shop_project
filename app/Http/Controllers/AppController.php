@@ -37,7 +37,8 @@ class AppController extends Controller
             ->where('category_id', $category)
             ->where('subcategory_id', $subcategory)
             ->paginate(8);
-        if(isEmpty($products)) return redirect()->route('show_product')->with('info', 'Nie ma takich kategorii.');
+
+        //if(count($products)) return redirect()->route('show_product')->with('info', 'Nie ma takich kategorii.');
 
         return view('shop.show_product', ['products' => $products]);
     }

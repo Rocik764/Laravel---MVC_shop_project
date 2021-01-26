@@ -99,8 +99,7 @@ class ProductsController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:category,id',
             'producent_id' => 'required|exists:producent,id',
-            'subcategory_id' => 'required|exists:subcategory,id',
-            'image' => 'required|image'
+            'subcategory_id' => 'required|exists:subcategory,id'
         ]);
 
         $product = Product::query()->find($request->input('id'));

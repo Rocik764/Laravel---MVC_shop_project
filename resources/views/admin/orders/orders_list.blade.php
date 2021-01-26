@@ -10,8 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ asset('/js/sidebar_script.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/amount_control.js') }}"></script>
+    <script src="{{ asset('/js/sidebar_script.js') }}"></script>
+    <script src="{{ asset('/js/amount_control.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </head>
 <body>
@@ -61,7 +61,7 @@
                             <td>{{ $order->total_price }}</td>
                             <td>{{ $order->comment }}</td>
                             <td>
-                                <a href="{{ route('completeOrder', ['id' => $order->id]) }}">@php if($order->is_completed) echo 'Cofnij realizację'; else echo 'Zrealizuj' @endphp</a>
+                                <a href="{{ route('completeOrder', ['id' => $order->id]) }}"><span>@php if($order->is_completed) echo 'Cofnij realizację'; else echo 'Zrealizuj' @endphp</span></a>
                             </td>
                         </tr>
                         @endforeach

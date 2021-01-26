@@ -25,7 +25,7 @@
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
                         Popularne kategorie
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu">
                         <div class="dropdown-header">Dla psa</div>
                         <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 1])}}">Zabawki</a>
                         <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 1])}}">Karma</a>
@@ -44,7 +44,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button">
                         Konto
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu">
                         @guest
                             @if (Route::has('login'))
                                 <a class="dropdown-item" href="{{ route('login') }}">Zaloguj</a>
