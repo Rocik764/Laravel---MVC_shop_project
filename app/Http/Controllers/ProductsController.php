@@ -194,9 +194,9 @@ class ProductsController extends Controller
         return redirect()->route('list_orders');
     }
 
-    public function getDetails($uId, $date) {
-        $orderDetails = OrderDetails::where('user_id', $uId)
-            ->where('purchase', $date)
+    public function getDetails(Request $request) {
+        $orderDetails = OrderDetails::where('user_id', $request->uId)
+            ->where('purchase', $request->date)
             ->get();
 
         return view('fragments.getdetails', compact('orderDetails'));

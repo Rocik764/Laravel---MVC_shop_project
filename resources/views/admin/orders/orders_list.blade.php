@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/sidebar_script.js') }}"></script>
     <script src="{{ asset('/js/amount_control.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
 @include('fragments.animated')
@@ -76,20 +76,20 @@
 <script>
 
     function showDetails(uId, date) {
-        console.log(uId + " " + formatDate(date))
-
-        let url = "/manage/show_details/" + uId + "/" + formatDate(date);
-        showDetailsModal(url)
+        const url_route = "{{ route('get_orders_details') }}"
+        showDetailsModal(url_route, uId, date)
     }
 
-    function showDetailsModal(url) {
+    function showDetailsModal(url, uId, date) {
         console.log("showDetailsModal ", url)
         const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
         $.ajax({
             type: "POST",
             url: url,
             data:{
-                _token: CSRF_TOKEN
+                _token: CSRF_TOKEN,
+                uId: uId,
+                date: formatDate(date)
             },
         }).done(function (response) {
             // let array = response.split("  ")

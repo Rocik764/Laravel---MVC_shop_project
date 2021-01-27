@@ -41,16 +41,17 @@ Route::group(['prefix' => 'manage', 'middleware' => 'auth','middleware' => 'auth
     Route::get('list_products', 'ProductsController@getProducts')->name('list_products');
     Route::get('list_orders', 'ProductsController@getOrders')->name('list_orders');
     Route::get('completeOrder/{id}', 'ProductsController@completeOrder')->name('completeOrder');
-    Route::post('show_details/{uId}/{date}', 'ProductsController@getDetails')->name('getDetails');
+    Route::post('show_details', 'ProductsController@getDetails')->name('get_orders_details');
     Route::get('delete_category/{id}', 'ProductsController@postDeleteCategory')->name('deleteCategory');
     Route::get('delete_subcategory/{id}', 'ProductsController@postDeleteSubcategory')->name('deleteSubcategory');
     Route::get('delete_producent/{id}', 'ProductsController@postDeleteProducent')->name('deleteProducent');
 });
 
+Route::post('/add', [App\Http\Controllers\ShoppingCartController::class, 'addToCart'])->name('cart_add');
+
 //  USER
 Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function() {
     Route::get('show_cart', 'ShoppingCartController@showCart')->name('show_cart');
-    Route::post('/add','ShoppingCartController@addToCart')->name('cart_add');
     Route::post('/remove/{productId}/{amount}','ShoppingCartController@removeFromCart')->name('cart_remove');
     Route::post('/update','ShoppingCartController@updateCart')->name('cart_update');
     Route::get('order', 'ShoppingCartController@getOrderInfo')->name('show_order_info');
@@ -60,6 +61,10 @@ Route::group(['prefix' => 'cart', 'middleware' => 'auth'], function() {
 Route::group(['prefix' => 'user'], function() {
     Route::get('orders', 'LoggedUsersController@showOrders')->name('show_orders');
     Route::get('profile', 'LoggedUsersController@showProfile')->name('show_profile');
+    Route::post('show_details', 'LoggedUsersController@getDetails')->name('get_details');
+    Route::post('editName', 'LoggedUsersController@editName')->name('edit_name');
+    Route::post('editEmail', 'LoggedUsersController@editEmail')->name('edit_email');
+    Route::post('editPassword', 'LoggedUsersController@editPassword')->name('edit_password');
 });
 
 Auth::routes();

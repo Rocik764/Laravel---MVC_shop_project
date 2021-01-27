@@ -25,40 +25,34 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <h3>Profil:</h3>
-            <form action="@{/users/editMail}" method="post">
+            <form action="{{ route('edit_name') }}" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        {{ csrf_field() }}
+                        <button class="btn btn-outline-secondary" type="submit" id="btnSaveName" disabled>Zapisz</button>
+                        <button class="btn btn-outline-secondary" type="button" id="btnEditName"><span>Edytuj</span></button>
+                    </div>
+                    <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" readonly="readonly">
+                </div>
+            </form>
+            <form action="{{ route('edit_email') }}" method="post">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        {{ csrf_field() }}
                         <button class="btn btn-outline-secondary" type="submit" id="btnSaveMail" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditMail"><span>Edytuj</span></button>
                     </div>
-                    <input type="text" name="email" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly="readonly">
                 </div>
             </form>
-            <form action="@{/users/editFirstName}" method="post">
+            <form action="{{ route('edit_password') }}" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="submit" id="btnSaveFirstName" disabled>Zapisz</button>
-                        <button class="btn btn-outline-secondary" type="button" id="btnEditFirstName"><span>Edytuj</span></button>
-                    </div>
-                    <input type="text" name="first_name" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
-                </div>
-            </form>
-            <form action="@{/users/editLastName}" method="post">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="submit" id="btnSaveLastName" disabled>Zapisz</button>
-                        <button class="btn btn-outline-secondary" type="button" id="btnEditLastName"><span>Edytuj</span></button>
-                    </div>
-                    <input type="text" name="last_name" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
-                </div>
-            </form>
-            <form action="@{/users/editPassword}" method="post">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
+                        {{ csrf_field() }}
                         <button class="btn btn-outline-secondary" type="submit" id="btnSavePassword" disabled>Zapisz</button>
                         <button class="btn btn-outline-secondary" type="button" id="btnEditPassword"><span>Edytuj</span></button>
                     </div>
-                    <input type="password" name="password" class="form-control" value="" aria-label="" aria-describedby="basic-addon1" readonly="readonly" required>
+                    <input type="password" name="password" class="form-control" placeholder="Nowe hasło" readonly="readonly">
                 </div>
             </form>
         </div>
@@ -80,15 +74,15 @@
         })
     })
     $(document).ready(function() {
-        $('#btnEditFirstName').click(function() {
-            if($("#btnSaveFirstName").is(":disabled")) {
-                $("input[name='first_name']").removeAttr("readonly")
-                $("#btnSaveFirstName").prop("disabled", false)
-                $("#btnEditFirstName span").text("Anuluj")
+        $('#btnEditName').click(function() {
+            if($("#btnSaveName").is(":disabled")) {
+                $("input[name='name']").removeAttr("readonly")
+                $("#btnSaveName").prop("disabled", false)
+                $("#btnEditName span").text("Anuluj")
             } else {
-                $("input[name='first_name']").prop("readonly", true)
-                $("#btnSaveFirstName").prop("disabled", true)
-                $("#btnEditFirstName span").text("Edytuj")
+                $("input[name='name']").prop("readonly", true)
+                $("#btnSaveName").prop("disabled", true)
+                $("#btnEditName span").text("Edytuj")
             }
         })
     })
