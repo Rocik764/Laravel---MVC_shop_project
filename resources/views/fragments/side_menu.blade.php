@@ -14,10 +14,10 @@
                 <a href="{{route('new_product')}}">Dodaj produkty</a>
             </li>
             <li>
-                <a href="{{route('edit_category_subcategory')}}">Usuń kategorie</a>
+                <a href="{{route('edit_category_subcategory')}}">Usuń kategorie / producentów</a>
             </li>
             <li>
-                <a href="{{route('new_category_subcategory')}}">Dodaj kategorie</a>
+                <a href="{{route('new_category_subcategory')}}">Dodaj kategorie / producentów</a>
             </li>
             @can("manage-users")
             <li>

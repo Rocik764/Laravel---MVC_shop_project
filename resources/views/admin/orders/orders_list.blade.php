@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
-                        <tr style="cursor: pointer" onclick="showDetails( {{ $order->user->id }}, new Date('{{ $order->purchase_date }}') )">
+                        <tr style="cursor: pointer" onclick="showDetails( {{ $order->user->id }}, new Date('{{ $order->purchase_date }}'), {{ $order->id }} )">
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->name }}</td>
                             <td>{{ $order->purchase_date }}</td>
@@ -75,13 +75,14 @@
 @include('fragments.order_details_modal')
 <script>
 
-    function showDetails(uId, date) {
+    function showDetails(uId, date, id) {
+        console.log(formatDate(date))
         const url_route = "{{ route('get_orders_details') }}"
-        showDetailsModal(url_route, uId, date)
+        showDetailsModal(url_route, uId, date, id)
     }
 
-    function showDetailsModal(url, uId, date) {
-        console.log("showDetailsModal ", url)
+    function showDetailsModal(url, uId, date, id) {
+        console.log("showDetailsModal " + url + " : " + date)
         const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
         $.ajax({
             type: "POST",
@@ -92,11 +93,7 @@
                 date: formatDate(date)
             },
         }).done(function (response) {
-            // let array = response.split("  ")
-            // array.forEach(function(item) {
-            //     $('#resultGetAllCustomerDiv .list-group').append("<li class=\"list-group-item\">" + item + "</li>");
-            // })
-            $("#modalDetailsTitle").text("Detale produktów")
+            $("#modalDetailsTitle").text("Detale produktów zamówienia o ID = " + id)
             $("#modalDetailsBody").html(response)
             $("#myDetailsModal").modal()
         }).fail(function (jqXHR, textStatus, errorThrown) {

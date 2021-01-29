@@ -28,8 +28,12 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="min-height: 80vh">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <h1>Partnerzy</h1>
+                            <h3>Nasi partnerzy</h3>
                             <div class="line"></div>
+                            <p><strong>Dążąc do perfekcji i wciąż doskonaląc swoją ofertę, nasz sklep wybiera jako swoich partnerów najlepszych producentów żywności i akcesorii dla zwierząt na świecie.</strong><br/>
+                                Niespełna 15 lat obecności na rynku, pozwoliło nam na wypracowanie trwałych relacji z wieloma firmami zarówno w Polsce jak i za granicą.
+                                Obecnie współpracujemy zarówno z dużymi korporacjami jak i małymi przedsiębiorstwami.
+                                Zawsze staramy się dopasować ofertę pod potrzeby naszych klientów mając na uwadze wysoką jakość oferowanych produktów i usług.</p>
                         </div>
                         @foreach($producents as $producent)
                         <div class="carousel-item">
@@ -42,11 +46,11 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only"></span>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only"></span>
                     </a>
                 </div>
             </div>
