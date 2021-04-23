@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
@@ -25,45 +25,16 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>Strona główna</h1>
-                @if(\Illuminate\Support\Facades\Session::has('info'))
-                    <div class="row">
-                        <div class="col-md-12 mt-5">
-                            <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
-                        </div>
-                    </div>
-                @endif
                 <div class="row">
                     <div class="col-6">
-                        <div class="alert alert-primary" role="alert">
-                            <h2>Konta</h2>
-                            <p>
-                                Admin:<br/>
-                                login: admin@mail.com<br/>
-                                hasło: 123456<br/><br/>
-                                Employee:<br/>
-                                login: employee@mail.com<br/>
-                                hasło: 123456<br/><br/>
-                                User:<br/>
-                                login: user@mail.com<br/>
-                                hasło: 123456
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="alert alert-secondary" role="alert">
-                            <h2>Co może robić itp.</h2>
-                            <p>
-                                Admin:<br/>
-                                Konto -> administracja (dodawanie użytkowników (cele testowe) / edycja użytkowników (role, hasła, nazwy itp) -> zamówienia (realizacja zamówień) itp.
-                                Menu podręczne -> Zarządzanie (produktami / użytkownikami / kategoriami)<br/><br/>
-                                Employee:<br/>
-                                Konto -> zamówienia (realizacja zamówień) itp.
-                                Menu podręczne -> Zarządzanie (produktami / kategoriami)<br/><br/>
-                                User:<br/>
-                                Menu podręczne -> Filtrowanie produktów / dodawanie do koszyka / zamawianie ich / edycja profilu itp.
-                            </p>
-                        </div>
+                        <h1>Index</h1>
+                        @if(\Illuminate\Support\Facades\Session::has('info'))
+                            <div class="row">
+                                <div class="col-md-12 mt-5">
+                                    <p class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('info') }}</p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

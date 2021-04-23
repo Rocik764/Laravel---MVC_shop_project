@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Koszyk</title>
+    <title>Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -26,11 +26,11 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <p>Koszyk użytkownika: {{ Auth::user()->name }}</p>
+                <p>User's cart: {{ Auth::user()->name }}</p>
                 <div class="row m-1">
                     <div class="col-lg-8">
                         @php if($cart == null) { @endphp
-                            <p class="alert alert-info">Brak produktów w koszyku.</p>
+                            <p class="alert alert-info">No products found in your cart.</p>
                         @php } else { @endphp
                             @foreach($cart as $item)
     {{--                            <div class="row border rounded" th:with="product = ${item.product}" th:id="'row' + ${status.count}">--}}
@@ -57,10 +57,10 @@
                                         </div>
                                         <div>
                                             <span>x</span>
-                                            <span>{{ $item->product->price }}&nbsp;zł</span>
+                                            <span>{{ $item->product->price }}&nbsp;pln</span>
                                         </div>
                                         <div>
-                                            <span>=&nbsp;</span><span class="h4 productSubtotal" id="<?php echo 'subtotal'.$item->product->id?>">{{ $item->getSubtotal() }}</span><span class="h4">&nbsp;zł</span>
+                                            <span>=&nbsp;</span><span class="h4 productSubtotal" id="<?php echo 'subtotal'.$item->product->id?>">{{ $item->getSubtotal() }}</span><span class="h4">&nbsp;pln</span>
                                         </div>
                                     </div>
                                 </div>
@@ -69,13 +69,13 @@
                     </div>
                     <div class="col-lg-4">
                         <div>
-                            <span class="h3">Podsumowanie:</span>
+                            <span class="h3">Total:</span>
                         </div>
                         <div class="mt-2">
                             <span class="h2" id="totalAmount"></span>
                         </div>
                         <div class="mt-2">
-                            <a href="{{ route('show_order_info') }}"><button class="btn btn-danger p-3 mt-2">Zakup</button></a>
+                            <a href="{{ route('show_order_info') }}"><button class="btn btn-danger p-3 mt-2">Go to order</button></a>
                         </div>
                     </div>
                     @php } @endphp

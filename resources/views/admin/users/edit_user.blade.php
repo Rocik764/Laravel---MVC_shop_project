@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edytuj użytkownika</title>
+    <title>Edit user</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -25,7 +25,7 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>Edytuj użytkownika z ID: {{ $user -> id }}</h1>
+                <h1>Edit user with ID: {{ $user -> id }}</h1>
                 <form action="{{ route('admin.users.update', $user) }}" method="POST">
                     <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">
-                        Aktualizuj
+                        Update
                     </button>
                 </form>
             </div>

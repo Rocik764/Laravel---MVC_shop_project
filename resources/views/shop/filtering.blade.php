@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Filtry</title>
+    <title>Filters</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -25,24 +25,24 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>Filtrowanie</h1>
+                <h1>Filters</h1>
                 <form action="{{ route('post_filtering') }}" method="POST">
                     <div class="form-group">
-                        <label for="filter-word">Wpisz wyszukiwaną frazę</label>
+                        <label for="filter-word">What are you looking for</label>
                         <input type="text" class="form-control" id="filter-word" name="filterWord">
                     </div>
                     <div class="form-group">
-                        <label for="filter-price-from">Cena od</label>
+                        <label for="filter-price-from">Price from</label>
                         <input type="number" step="0.01" class="form-control" id="filter-price-from" name="filterPriceFrom" min="0" value="0">
                     </div>
                     <div class="form-group">
-                        <label for="filter-price-to">Cena do</label>
+                        <label for="filter-price-to">Price to</label>
                         <input type="number" step="0.01" class="form-control" id="filter-price-to" name="filterPriceTo" min="0">
                     </div>
                     <div class="form-group">
-                        <label for="inputCategory">Kategoria</label>
+                        <label for="inputCategory">Category</label>
                         <select id="inputCategory" name="category" class="form-control">
-                            <option value="">Wszystko</option>
+                            <option value="">All</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -51,16 +51,16 @@
                     <div class="form-group">
                         <label for="inputProducent">Producent</label>
                         <select id="inputProducent" name="producent" class="form-control">
-                            <option value="">Wszystko</option>
+                            <option value="">All</option>
                             @foreach($producents as $producent)
                                 <option value="{{ $producent->id }}">{{ $producent->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="inputSubategory">Zwierzę</label>
+                        <label for="inputSubategory">Subcategory</label>
                         <select id="inputSubategory" name="subcategory" class="form-control">
-                            <option value="">Wszystko</option>
+                            <option value="">All</option>
                             @foreach($subcategories as $subcategory)
                                 <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                             @endforeach
@@ -69,7 +69,7 @@
                     <div class="form-group row">
                         <div class="col-lg text-center">
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">Szukaj</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </form>

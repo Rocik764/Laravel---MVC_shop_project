@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nowy produkt</title>
+    <title>New product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -25,7 +25,7 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>Dodaj nowy produkt</h1>
+                <h1>Add new product</h1>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -37,31 +37,31 @@
                 @endif
                 <form action="{{route('create_product')}}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
-                        <label for="inputFirstName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
+                        <label for="inputFirstName" class="col-sm col-form-label text-center font-weight-bold">Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputFirstName" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
+                        <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Description</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputLastName" name="description">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
+                        <label for="inputEmail" class="col-sm col-form-label text-center font-weight-bold">Quantity</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control" id="inputEmail" name="quantity">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
+                        <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Price</label>
                         <div class="col-sm-10">
                             <input type="number" step="0.01" class="form-control" id="inputPassword" name="price">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
+                        <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Category</label>
                         <div class="col-sm-10">
                             <select id="inputCategory" class="selectpicker" name="category_id">
                                 @foreach($categories as $category)
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Zwierzę</label>
+                        <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Subcategory</label>
                         <div class="col-sm-10">
                             <select id="inputSubategory" class="selectpicker" name="subcategory_id">
                                 @foreach($subcategories as $subcategory)
@@ -91,14 +91,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="image" class="col-sm col-form-label text-center font-weight-bold">Obrazek</label>
+                        <label for="image" class="col-sm col-form-label text-center font-weight-bold">Image</label>
                         <div class="col-sm-10">
                             <input type="file" name="image" class="form-control-file" id="image" accept="image/png, image/jpeg" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg text-center">
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                     @csrf

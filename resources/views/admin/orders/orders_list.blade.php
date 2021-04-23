@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Lista zamówień</title>
+    <title>Orders list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -33,17 +33,17 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Użytkownik</th>
-                            <th>Zakupiono</th>
-                            <th>Zrealizowano</th>
-                            <th>Adres</th>
-                            <th>Faktura</th>
-                            <th>Telefon</th>
-                            <th>Dostawa</th>
-                            <th>Płatność</th>
-                            <th>Zapłacono</th>
-                            <th>Komentarz</th>
-                            <th>Akcje</th>
+                            <th>User</th>
+                            <th>Bought</th>
+                            <th>Realized</th>
+                            <th>Address</th>
+                            <th>Invoice</th>
+                            <th>Phone</th>
+                            <th>Delivery</th>
+                            <th>Payment</th>
+                            <th>Paid</th>
+                            <th>Comment</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,7 @@
                             <td>{{ $order->total_price }}</td>
                             <td>{{ $order->comment }}</td>
                             <td>
-                                <a href="{{ route('completeOrder', ['id' => $order->id]) }}"><span>@php if($order->is_completed) echo 'Cofnij realizację'; else echo 'Zrealizuj' @endphp</span></a>
+                                <a href="{{ route('completeOrder', ['id' => $order->id]) }}"><span>@php if($order->is_completed) echo 'undo'; else echo 'realize' @endphp</span></a>
                             </td>
                         </tr>
                         @endforeach
@@ -93,7 +93,7 @@
                 date: formatDate(date)
             },
         }).done(function (response) {
-            $("#modalDetailsTitle").text("Detale produktów zamówienia o ID = " + id)
+            $("#modalDetailsTitle").text("Order details with ID = " + id)
             $("#modalDetailsBody").html(response)
             $("#myDetailsModal").modal()
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -101,8 +101,8 @@
             console.log(jqXHR.responseText);
             console.log(textStatus);
             console.log(errorThrown);
-            $("#modalDetailsTitle").text("Detale produktów")
-            $("#modalDetailsBody").text("Coś poszło nie tak")
+            $("#modalDetailsTitle").text("Order details")
+            $("#modalDetailsBody").text("Something went wrong")
             $("#myDetailsModal").modal()
         });
     }

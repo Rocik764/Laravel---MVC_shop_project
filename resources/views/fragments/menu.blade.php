@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class="row" style="color: #FFFFFF;">
         <div class="col-12 col-md-2">
-            <p><img src="{{ asset('/img/phone-call.png') }}" alt="phone"/> 58 577 625 825</p>
+            <p><img src="{{ asset('/img/phone-call.png') }}" alt="phone"/> 58 123 456 789</p>
         </div>
         <div class="col-12 col-md-2">
-            <p><img src="{{ asset('/img/email.png') }}" alt="email"/> zoologiczny@gmail.com</p>
+            <p><img src="{{ asset('/img/email.png') }}" alt="email"/> mail@mail.com</p>
         </div>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-head">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{route('show_index')}}"><img src="{{ asset('/img/fox_logo.png') }}" width="50" height="50" alt="logo"/> Zoologiczny.pl</a>
+        <a class="navbar-brand" href="{{route('show_index')}}"><img src="{{ asset('/img/fox_logo.png') }}" width="50" height="50" alt="logo"/> Logo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,54 +23,54 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
-                        Popularne kategorie
+                        Popular categories
                     </a>
                     <div class="dropdown-menu">
-                        <div class="dropdown-header">Dla psa</div>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 1])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 1])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 1])}}">Akcesoria</a>
-                        <div class="dropdown-header">Dla kota</div>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 2])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 2])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 2])}}">Akcesoria</a>
-                        <div class="dropdown-header">Dla ryb</div>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 3])}}">Zabawki</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 3])}}">Karma</a>
-                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 3])}}">Akcesoria</a>
+                        <div class="dropdown-header">For dog</div>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 1])}}">Toys</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 1])}}">Kibble</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 1])}}">Accessories</a>
+                        <div class="dropdown-header">For cat</div>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 2])}}">Toys</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 2])}}">Kibble</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 2])}}">Accessories</a>
+                        <div class="dropdown-header">For fish</div>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 1, 'subcategory' => 3])}}">Toys</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 2, 'subcategory' => 3])}}">Kibble</a>
+                        <a class="dropdown-item" href="{{route('show_products', ['category' => 3, 'subcategory' => 3])}}">Accessories</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button">
-                        Konto
+                        Account
                     </a>
                     <div class="dropdown-menu">
                         @guest
                             @if (Route::has('login'))
-                                <a class="dropdown-item" href="{{ route('login') }}">Zaloguj</a>
+                                <a class="dropdown-item" href="{{ route('login') }}">Login</a>
                                 <div class="dropdown-divider"></div>
                             @endif
                             @if (Route::has('register'))
-                                <a class="dropdown-item" href="{{ route('register') }}">Zajerestruj</a>
+                                <a class="dropdown-item" href="{{ route('register') }}">Register</a>
                             @endif
                         @else
-                        <a class="dropdown-item" href="{{route('show_profile')}}">Profil</a>
+                        <a class="dropdown-item" href="{{route('show_profile')}}">Profile</a>
                         <div class="dropdown-divider" ></div>
-                        <a class="dropdown-item" href="{{route('show_cart')}}">Koszyk</a>
+                        <a class="dropdown-item" href="{{route('show_cart')}}">Cart</a>
                         <div class="dropdown-divider" ></div>
-                        <a class="dropdown-item" href="{{route('show_orders')}}">Moje zamówienia</a>
+                        <a class="dropdown-item" href="{{route('show_orders')}}">My orders</a>
                         @can("manage-products")
                         <div class="dropdown-divider" ></div>
-                        <a class="dropdown-item" href="{{route('list_orders')}}">Zamówienia</a>
+                        <a class="dropdown-item" href="{{route('list_orders')}}">Orders</a>
 
                         @endcan
                         @can('manage-users')
                         <div class="dropdown-divider" ></div>
-                        <a class="dropdown-item" href="{{route('admin.users.index')}}">Administracja</a>
+                        <a class="dropdown-item" href="{{route('admin.users.index')}}">Administrate</a>
                         @endcan
                         <div class="dropdown-divider"></div>
                         <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="post">
-                            <input type="submit" value="Wyloguj"/>
+                            <input type="submit" value="Logout"/>
                             @csrf
                         </form>
                         @endguest

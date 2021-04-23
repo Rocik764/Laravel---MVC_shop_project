@@ -1,62 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel MVC - Online shop
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of contents
+* [About project](#about-project)
+* [Technologies](#technologies)
+* [Database structure](#database-structure)
+* [Example screenshots](#example-screenshots)
 
-## About Laravel
+## About project
+This is exactly the same project as [this](https://github.com/Rocik764/Spring-Boot---MVC_shop_project) one, but made in Laravel.
+My first bigger project using Laravel for university. The application is basicaly an online shop where users can register, 
+search for products, add them to cart, remove if needed, order products and check their orders. Admins can
+add new products/categories etc, manage users and shop. Authentication is session based using Spring Security,
+frontend made with Thymeleaf templates and bootstrap.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies
+* Laravel 8
+* Bootstrap 4
+* PHP 8
+* JavaScript
+* PostgreSQL
+* HTML & CSS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Database structure
+##### cart_items
+| id  | product_id | user_id | amount |
+| --- |:----------:| -------:|-------:|
+|serial|integer|integer|integer|
+##### category
+| id  | name |
+| --- |:----:|
+|serial|varchar(50)|
+##### subcategory
+| id  | name |
+| --- |:----:|
+|serial|varchar(50)|
+##### orders
+| id  | user_id | purchase_date | is_completed | address | invoice | phone | comment | delivery | payment | total_price |
+| --- |:-----  :| ------------- |:------------:| ------- |:-------:| ----- |:-------:| -------- |:-------:|-------------|
+|serial|integer|date|boolean|varchar(100)|boolean|varchar(17)|text|varchar(30)|varchar(30)|double precision|
+##### orders_details
+| id  | product_id | user_id | amount | purchase |
+| --- |:--------  :| ------- |:------:| ---------|
+|serial|integer|integer|integer|date|
+##### producent
+| id  | name | characteristics | phone |
+| --- |:----:|-----------------|-------|
+|serial|varchar(50)|text|varchar(17)|
+##### product
+| id  | name | description | quantity | price | category_id | subcategory_id | producent_id | image |
+| --- |:----:| ----------- |:--------:| ----- |:-----------:| -------------- |:------------:| ----- |
+|serial|varchar(100)|text|integer|double precision|integer|integer|integer|bytea|
+##### roles
+| role_id  | name |
+| -------- |:----:|
+|integer|varchar(45)|
+##### user
+| id  | name | email | email_verified_at | password | remember_token | created_at | updated_at |
+| --- |:----:|:-----:|:-----------------:|:--------:|----------------|------------|------------|
+|bigserial|varchar(255)|varchar(255)|timestamp|varchar(255)|varchar(100)|timestamp|timestamp|
+##### users_roles
+| user_id  | role_id |
+| -------- |:-------:|
+|integer|integer|
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+[products_list]: ./readme_images/products_list.JPG "products list"
+[product_add_to_cart]: ./readme_images/product_add_to_cart.JPG "add to cart"
+[cart]: ./readme_images/cart.JPG "cart"
+[order]: ./readme_images/order.JPG "order"
+[checking_order]: ./readme_images/checking_order.gif "checking order"
+[checking_all_orders]: ./readme_images/checking_all_orders.gif "checking all orders"
+[edit_products_and_users]: ./readme_images/edit_products_and_users.gif "editing products and users"
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Example screenshots
+(in case anyone wants to see it without downloading)
+##### Products list
+![alt text][products_list]
+##### Adding product to cart (need to be logged in and cannot add more than there's available or less than 1)
+![alt text][product_add_to_cart]
+##### User's cart
+![alt text][cart]
+##### User ordering products in his cart
+![alt text][order]
+##### User checking his order
+![alt text][checking_order]
+##### Admin checking all orders (can finish them or un-finish)
+![alt text][checking_all_orders]
+##### Admin managing products and users (editing/removing products and users etc)
+![alt text][edit_products_and_users]

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>500</title>
@@ -24,7 +24,7 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>500 - Błąd serwera</h1>
+                <h1>500 - Server error</h1>
             </div>
         </div>
     </div>

@@ -5,9 +5,9 @@
 <table id="customers">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">@php echo 'Produkt'; @endphp</th>
-            <th scope="col">@php echo 'Użytkownik'; @endphp</th>
-            <th scope="col">@php echo 'Ilość'; @endphp</th>
+            <th scope="col">@php echo 'Product'; @endphp</th>
+            <th scope="col">@php echo 'User'; @endphp</th>
+            <th scope="col">@php echo 'Quantity'; @endphp</th>
         </tr>
     </thead>
     <tbody>

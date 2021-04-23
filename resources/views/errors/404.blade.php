@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>404</title>
@@ -24,7 +24,7 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>404 - Nie znaleziono zasobów</h1>
+                <h1>404 - Not found</h1>
             </div>
         </div>
     </div>

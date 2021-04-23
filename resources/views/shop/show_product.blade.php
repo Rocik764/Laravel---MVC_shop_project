@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Produkty</title>
+    <title>Products</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -36,7 +36,7 @@
                         @if(count($products) == 0)
                         <div class="row">
                             <div class="col-md-12 mt-5">
-                                <p class="alert alert-info">Nie ma takich kategorii.</p>
+                                <p class="alert alert-info">No categories found.</p>
                             </div>
                         </div>
                         @endif
@@ -49,8 +49,8 @@
                                     <div class="p-4">
                                         <p class="small text-white mb-0">
                                             <b>{{ $product->name }}</b><br/>
-                                            Ilość: {{ $product->quantity }}<br/>
-                                            Cena: {{ $product->price }}<br/>
+                                            Quantity: {{ $product->quantity }}<br/>
+                                            Price: {{ $product->price }}<br/>
                                         </p>
                                     </div>
                                 </a>
@@ -69,8 +69,8 @@
                                     <div class="p-4">
                                         <p class="small text-white mb-0">
                                             <b>{{ $product->name }}</b><br/>
-                                            Ilość: {{ $product->quantity }}<br/>
-                                            Cena: {{ $product->price }}<br/>
+                                            Quantity: {{ $product->quantity }}<br/>
+                                            Price: {{ $product->price }}<br/>
                                         </p>
                                     </div>
                                 </a>

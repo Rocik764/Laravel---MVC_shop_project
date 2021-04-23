@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nowe kategorie</title>
+    <title>New categories</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -27,34 +27,34 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6">
-                        <h1>Dodaj nową kategorię</h1>
+                        <h1>Add new category</h1>
                         <form action="{{ route('create_category') }}" method="post">
                             <div class="form-group row">
-                                <label for="inputCategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
+                                <label for="inputCategory" class="col-12 col-form-label text-center font-weight-bold">Name</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control text-center" id="inputCategory" name="name">
                                 </div>
                             </div>
                             <div class="form-group row mt-2">
                                 <div class="col-lg text-center">
-                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                             @csrf
                         </form>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <h1>Dodaj nową podkategorię</h1>
+                        <h1>Add new subcategory</h1>
                         <form action="{{ route('create_subcategory') }}" method="post">
                             <div class="form-group row">
-                                <label for="inputSubcategory" class="col-12 col-form-label text-center font-weight-bold">Nazwa</label>
+                                <label for="inputSubcategory" class="col-12 col-form-label text-center font-weight-bold">Name</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control text-center" id="inputSubcategory" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg text-center mt-2">
-                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                             @csrf
@@ -63,29 +63,29 @@
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <h1>Dodaj nowego producenta</h1>
+                        <h1>Add new producent</h1>
                         <form action="{{ route('create_producent') }}" method="post">
                             <div class="form-group row">
-                                <label for="inputProducentName" class="col-2 col-form-label text-center font-weight-bold">Nazwa</label>
+                                <label for="inputProducentName" class="col-2 col-form-label text-center font-weight-bold">Name</label>
                                 <div class="col-10">
                                     <input type="text" class="form-control" id="inputProducentName" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputProducentCharacteristics" class="col-2 col-form-label text-center font-weight-bold">Charakterystyka</label>
+                                <label for="inputProducentCharacteristics" class="col-2 col-form-label text-center font-weight-bold">Characteristics</label>
                                 <div class="col-10">
                                     <textarea type="text" class="form-control" id="inputProducentCharacteristics" name="characteristics" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row mt-1">
-                                <label for="inputProducentPhone" class="col-2 col-form-label text-center font-weight-bold">Telefon</label>
+                                <label for="inputProducentPhone" class="col-2 col-form-label text-center font-weight-bold">Phone</label>
                                 <div class="col-10">
                                     <input type="text" class="form-control" id="inputProducentPhone" name="phone" value="+__ ___ ___ ___" data-mask="+__ ___ ___ ___">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg text-center">
-                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                             @csrf

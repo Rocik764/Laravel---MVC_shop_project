@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista produktów</title>
+    <title>Products list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -35,13 +35,13 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Obrazek</th>
-                        <th>Nazwa</th>
-                        <th>Opis</th>
-                        <th>Ilość</th>
-                        <th>Cena</th>
-                        <th>Kategoria</th>
-                        <th>Podkategoria</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
                         <th>Producent</th>
                         <th>Actions</th>
                     </tr>

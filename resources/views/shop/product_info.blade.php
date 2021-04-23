@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Informacje o produkcie</title>
+    <title>Product info</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -39,11 +39,11 @@
                         <img src="{{ asset('uploads/images/'.$product->image) }}" alt="obrazek" style="width: 250px; height: 250px;">
                         <div class="col-md-7">
                             <p class="small text-white mb-0">
-                                Opis: {{ $product->description }}<br/>
-                                Ilość: {{ $product->quantity }}<br/>
-                                Cena: {{ $product->price }}<br/>
-                                Kategoria: {{ $product->category->name }}<br/>
-                                Zwierzę: {{ $product->subcategory->name }}<br/>
+                                Description: {{ $product->description }}<br/>
+                                Quantity: {{ $product->quantity }}<br/>
+                                Price: {{ $product->price }}<br/>
+                                Category: {{ $product->category->name }}<br/>
+                                Subcategory: {{ $product->subcategory->name }}<br/>
                                 Producent: {{ $product->producent->name }}
                             </p>
                         </div>
@@ -52,7 +52,7 @@
                                 @include('fragments.amount_control', ['amountValue' => 1])
                             </div>
                             <div class="mt-2">
-                                <button class="btn btn-primary" id="buttonAddToCart">Dodaj do koszyka</button>
+                                <button class="btn btn-primary" id="buttonAddToCart">Add to cart</button>
                             </div>
                         </div>
                     </div>

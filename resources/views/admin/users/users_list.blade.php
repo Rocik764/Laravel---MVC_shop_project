@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista użytkowników</title>
+    <title>Users list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -30,11 +30,11 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nazwa</th>
-                            <th>Hasło</th>
-                            <th>Mail</th>
-                            <th>Role</th>
-                            <th>Akcje</th>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,12 +46,12 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                             <td>
-                                <a class="float-left btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}" >Edytuj</a>
+                                <a class="float-left btn btn-primary" href="{{ route('admin.users.edit', $user->id) }}" >Edit</a>
                                 &nbsp;&nbsp;&nbsp;
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
                                     @csrf
                                     {{ method_field('DELETE') }}
-                                    <button type="submit" class="test2">Usuń</button>
+                                    <button type="submit" class="test2">Remove</button>
                                 </form>
                                 {{--                            <a href="{{ route('admin.users.destroy', $user->id) }}">Delete</a>--}}
                             </td>

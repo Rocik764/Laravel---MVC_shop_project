@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Szczegóły zamówienia</title>
+    <title>Order's details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -28,19 +28,19 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h2>Zamówienia użytkownika {{ auth()->user()->name }}</h2>
+                <h2>{{ auth()->user()->name }}'s orders</h2>
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Zakupiono</th>
-                        <th scope="col">Adres</th>
-                        <th scope="col">Faktura</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Dostawa</th>
-                        <th scope="col">Płatność</th>
-                        <th scope="col">Zapłacono</th>
-                        <th scope="col">Komentarz</th>
+                        <th scope="col">Bought</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Invoice</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Delivery</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Paid</th>
+                        <th scope="col">Comment</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -85,7 +85,7 @@
             // array.forEach(function(item) {
             //     $('#resultGetAllCustomerDiv .list-group').append("<li class=\"list-group-item\">" + item + "</li>");
             // })
-            $("#modalDetailsTitle").text("Detale produktów")
+            $("#modalDetailsTitle").text("Products details")
             $("#modalDetailsBody").html(response)
             $("#myDetailsModal").modal()
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -93,8 +93,8 @@
             console.log(jqXHR.responseText);
             console.log(textStatus);
             console.log(errorThrown);
-            $("#modalDetailsTitle").text("Detale produktów")
-            $("#modalDetailsBody").text("Coś poszło nie tak")
+            $("#modalDetailsTitle").text("Products details")
+            $("#modalDetailsBody").text("Something went wrong")
             $("#myDetailsModal").modal()
         });
     }

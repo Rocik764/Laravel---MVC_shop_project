@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-                    <h1>Zarejestruj się</h1>
+                    <h1>Register</h1>
                     <form action="{{ route('register') }}" method="POST" style="max-width: 600px; margin: 0 auto;">
                         <div class="m-3">
                             <div class="form-group row">

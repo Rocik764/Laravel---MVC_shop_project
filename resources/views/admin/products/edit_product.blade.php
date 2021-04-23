@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edytuj produkt</title>
+    <title>Edit product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -25,7 +25,7 @@
         @include('fragments.side_menu_collapse')
         <div id="content-main">
             <div class="container">
-                <h1>Edytuj produkt z ID:</h1>
+                <h1>Edit product with ID:</h1>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -40,31 +40,31 @@
                     <form action="{{ route('update_product_post', ['id' => $productId]) }}" method="post">
                         <input type="input" name="id" value="{{ $productId }}" hidden>
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm col-form-label text-center font-weight-bold">Nazwa</label>
+                            <label for="inputName" class="col-sm col-form-label text-center font-weight-bold">Name</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputDescription" class="col-sm col-form-label text-center font-weight-bold">Opis</label>
+                            <label for="inputDescription" class="col-sm col-form-label text-center font-weight-bold">Description</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="description" name="description" value="{{ $product->description }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputQuantity" class="col-sm col-form-label text-center font-weight-bold">Ilość</label>
+                            <label for="inputQuantity" class="col-sm col-form-label text-center font-weight-bold">Quantity</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Cena</label>
+                            <label for="inputNumber" class="col-sm col-form-label text-center font-weight-bold">Price</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Kategoria</label>
+                            <label for="inputCategory" class="col-sm col-form-label text-center font-weight-bold">Category</label>
                             <div class="col-sm-10">
                                 <select id="inputCategory" class="selectpicker" name="category_id" >
                                     @foreach($categories as $category)
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Zwierzę</label>
+                            <label for="inputSubategory" class="col-sm col-form-label text-center font-weight-bold">Subcategory</label>
                             <div class="col-sm-10">
                                 <select id="inputSubategory" class="selectpicker" name="subcategory_id">
                                     @foreach($subcategories as $subcategory)
@@ -96,7 +96,7 @@
                         <div class="form-group row">
                             <div class="col-lg text-center">
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-primary">Zapisz</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </form>

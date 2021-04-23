@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nowy użytkownik</title>
+    <title>New user</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -24,16 +24,16 @@
     <div id="content">
         @include('admin.users.resources.views.fragments.side_menu_collapse')
         <div id="content-main">
-            <h1>Stwórz nowego użytkownika (test)</h1>
+            <h1>Create new user (test)</h1>
             <form action="#" action="@{/admin/save}" object="${user}" method="post">
                 <div class="form-group row">
-                    <label for="inputFirstName" class="col-sm col-form-label  text-center font-weight-bold">Imię</label>
+                    <label for="inputFirstName" class="col-sm col-form-label  text-center font-weight-bold">Name</label>
                     <div class="col-sm-11">
                         <input type="text" class="form-control" id="inputFirstName" field="*{first_name}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Nazwisko</label>
+                    <label for="inputLastName" class="col-sm col-form-label text-center font-weight-bold">Second name</label>
                     <div class="col-sm-11">
                         <input type="text" class="form-control" id="inputLastName" field="*{last_name}">
                     </div>
@@ -45,14 +45,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Hasło</label>
+                    <label for="inputPassword" class="col-sm col-form-label text-center font-weight-bold">Password</label>
                     <div class="col-sm-11">
                         <input type="text" class="form-control" id="inputPassword" field="*{password}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg text-center">
-                        <button type="submit" class="btn btn-primary">Zapisz</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </form>

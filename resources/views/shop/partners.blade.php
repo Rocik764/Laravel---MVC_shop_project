@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Partnerzy</title>
+    <title>Partners</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style2.css') }}" />
@@ -28,7 +28,7 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="min-height: 80vh">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <h3>Nasi partnerzy</h3>
+                            <h3>Our partners</h3>
                             <div class="line"></div>
                             <p><strong>Dążąc do perfekcji i wciąż doskonaląc swoją ofertę, nasz sklep wybiera jako swoich partnerów najlepszych producentów żywności i akcesorii dla zwierząt na świecie.</strong><br/>
                                 Niespełna 15 lat obecności na rynku, pozwoliło nam na wypracowanie trwałych relacji z wieloma firmami zarówno w Polsce jak i za granicą.
@@ -40,7 +40,7 @@
                             <h3>{{ $producent->name }}</h3>
                             <div class="line"></div>
                             <p>{{ $producent->characteristics }}</p>
-                            <p>Telefon kontaktowy: {{ $producent->phone }}</p>
+                            <p>Phone: {{ $producent->phone }}</p>
                         </div>
                         @endforeach
                     </div>
