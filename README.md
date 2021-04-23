@@ -10,8 +10,8 @@
 This is exactly the same project as [this](https://github.com/Rocik764/Spring-Boot---MVC_shop_project) one, but made in Laravel.
 My first bigger project using Laravel for university. The application is basicaly an online shop where users can register, 
 search for products, add them to cart, remove if needed, order products and check their orders. Admins can
-add new products/categories etc, manage users and shop. Authentication is session based using Spring Security,
-frontend made with Thymeleaf templates and bootstrap.
+add new products/categories etc, manage users and shop. Authentication is session based,
+frontend made with Blade templates and bootstrap.
 
 ## Technologies
 * Laravel 8
